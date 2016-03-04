@@ -5,12 +5,12 @@ import javax.swing.*;
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
-public class portfolioGUI extends JFrame {
+public class PortfolioGUI extends JFrame {
     User user;
-    public portfolioGUI(User user){
+    public PortfolioGUI(User user){
         this.user = user;
     }
-    public portfolioGUI(){
+    public PortfolioGUI(){
         JLabel testLabel = new JLabel("Test User");
         this.add(testLabel);
         this.setSize(300,400);

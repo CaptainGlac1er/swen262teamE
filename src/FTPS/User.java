@@ -6,10 +6,10 @@ package FTPS;
 public class User {
     private String username;
     private String password; //the hashed password
-    public portfolio exportPortfolio(){
+    public Portfolio exportPortfolio(){
         return null;
     }
-    public void importPortolio(portfolio portfolio) {
+    public void importPortolio(Portfolio portfolio) {
 
     }
 }

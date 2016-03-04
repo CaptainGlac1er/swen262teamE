@@ -5,9 +5,9 @@ import javax.swing.*;
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
-public class stockGUI extends JFrame {
+public class StockGUI extends JFrame {
     StockChild child;
-    public stockGUI(StockChild child){
+    public StockGUI(StockChild child){
         this.child = child;
     }
 }
