@@ -12,19 +12,19 @@ public class CashAccount {
         accountWorth = inWorth;
     }
 
-    public String getAccountName(){
+    public String GetAccountName(){
         String nameTemp = accountName;
         return nameTemp;
     }
-    public int getAccountWorth() {
+    public int GetAccountWorth() {
         int worthTemp = accountWorth;
         return worthTemp;
     }
-    public void addCash(double amount){
+    public void AddCash(double amount){
         accountWorth += amount;
 
     }
-    public void removeCash(double amount){
+    public void RmoveCash(double amount){
         accountWorth -= amount;
     }
 }
