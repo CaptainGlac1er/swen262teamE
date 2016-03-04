@@ -3,11 +3,11 @@ package FTPS;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class CashAccount {
+public class cashAccount {
     private int accountWorth;
     private String accountName;
 
-    public CashAccount(int inWorth, String inName){
+    public cashAccount(int inWorth, String inName){
         accountName = inName;
         accountWorth = inWorth;
     }

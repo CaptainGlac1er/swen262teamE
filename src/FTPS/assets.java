@@ -5,20 +5,20 @@ import java.util.ArrayList;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class Assets {
+public class assets {
 
     private ArrayList<StockChild> stockList;
-    private ArrayList<CashAccount> cashAccountList;
+    private ArrayList<cashAccount> cashAccountList;
     private ArrayList<Transactions> transactionsList;
     private int accountCount = 0;
 
-    public Assets(){
+    public assets(){
         stockList = new ArrayList<StockChild>();
-        cashAccountList = new ArrayList<CashAccount>();
-        transactionsList = new ArrayList<Transcations>();
+        cashAccountList = new ArrayList<cashAccount>();
+        transactionsList = new ArrayList<Transactions>();
     }
     public void AddCashAccount(int inWorth, String inName){
-        CashAccount acct = new CashAccount(inWorth,inName);
+        cashAccount acct = new cashAccount(inWorth,inName);
         cashAccountList.add(accountCount,acct);
         accountCount++;
     }

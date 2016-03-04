@@ -14,7 +14,7 @@ public class StockChild extends StockParent {
 
     //Return total worth of owned stock
     public double GetTotWorth() {
-        return (super.GetWorth() * stockCount);
+        return (super.getWorth() * stockCount);
     }
 
     //Return the count of stocks owned
