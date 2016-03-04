@@ -7,15 +7,23 @@ import java.util.ArrayList;
  */
 public class assets {
     ArrayList<stocks> stockList;
-    ArrayList<cashAccount> cashAccounts;
+    ArrayList<CashAccount> cashAccountList;
     ArrayList<bonds> bondLists;
-    ArrayList<transcations> transcationsList;
-
-    public void createCashAccount(){
-
+    ArrayList<transcations> transactionsList;
+    private int accountCount = 0;
+    public assets(){
+        stockList = new ArrayList<stocks>();
+        cashAccountList = new ArrayList<CashAccount>();
+        bondLists = new ArrayList<bonds>();
+        transactionsList = new ArrayList<transcations>();
     }
-    public void removeCashAccount(){
-
+    public void createCashAccount(int inWorth, String inName){
+        CashAccount acct = new CashAccount(inWorth,inName);
+        cashAccountList.add(accountCount,acct);
+        accountCount++;
+    }
+    public void removeCashAccount(int inAccountIndex){
+        cashAccountList.remove(inAccountIndex);
     }
     public void createStock(){
 
