@@ -6,25 +6,25 @@ import java.util.ArrayList;
  * Created by CaptainGlac1er on 2/28/2016.
  */
 //portfolio contents
-public class Assets {
+public class assets {
 
     //store different types of portfolio data
     private ArrayList<StockChild> stockList;
-    private ArrayList<CashAccount> cashAccountList;
+    private ArrayList<cashAccount> cashAccountList;
     private ArrayList<Transactions> transactionsList;
     private int accountCount = 0;
 
     //constructor, initialize storage
-    public Assets(){
+    public assets(){
 
         stockList = new ArrayList<StockChild>();
-        cashAccountList = new ArrayList<CashAccount>();
+        cashAccountList = new ArrayList<cashAccount>();
         transactionsList = new ArrayList<Transactions>();
     }
     //create a cash account store it and record it
     public void AddCashAccount(double inWorth, String inName){
         //account
-        CashAccount acct = new CashAccount(inWorth,inName);
+        cashAccount acct = new cashAccount(inWorth,inName);
         cashAccountList.add(accountCount,acct);
         accountCount++;
 

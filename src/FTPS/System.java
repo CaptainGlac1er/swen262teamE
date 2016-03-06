@@ -28,7 +28,7 @@ public class System extends JFrame implements ActionListener{
 
         frame.setVisible(true);
         userStorage = new HashMap<>();
-        LoadUsers();
+        //LoadUsers();
 
     }
 
@@ -108,7 +108,7 @@ public class System extends JFrame implements ActionListener{
 
 
     public void LoginAction(String username, String password){
-
+        new portfolio();
         if (PasswordCheck(username, password)){
             //load user portfolio
         }

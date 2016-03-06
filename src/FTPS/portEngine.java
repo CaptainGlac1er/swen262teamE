@@ -3,7 +3,7 @@ package FTPS;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class PortEngine {
+public class portEngine {
     public void search(String search){
         
     }

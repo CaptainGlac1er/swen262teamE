@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class SystemGUI extends JFrame{
+public class systemGUI extends JFrame{
 
 
 

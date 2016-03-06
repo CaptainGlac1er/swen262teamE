@@ -5,16 +5,19 @@ package FTPS;
  */
 
 //user cash accounts
-public class CashAccount {
+public class cashAccount {
 
     //name and value
     private double accountWorth;
     private String accountName;
 
     //constructor for cashAccounts, name and value set
-    public CashAccount(double inWorth, String inName){
+    public cashAccount(double inWorth, String inName){
         accountName = inName;
         accountWorth = inWorth;
+    }
+    public cashAccount(User u){
+            new cashGUI();
     }
 
     //return the name of Acct
