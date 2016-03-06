@@ -17,7 +17,6 @@ public class cashAccount {
         accountWorth = inWorth;
     }
     public cashAccount(User u){
-            new cashGUI();
     }
 
     //return the name of Acct

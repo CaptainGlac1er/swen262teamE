@@ -5,6 +5,6 @@ package FTPS;
  */
 public class FTPS {
     public static void main(String[] args){
-        new portfolio();
+        new System();
     }
 }

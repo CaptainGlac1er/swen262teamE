@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by CaptainGlac1er on 3/4/2016.
@@ -22,7 +24,10 @@ public class portfolioGUI extends JFrame {
         cash.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new cashAccount();
+                ArrayList<cashAccount> tests = new ArrayList<cashAccount>();
+                tests.add(new cashAccount(100, "Test"));
+                tests.add(new cashAccount(123, "Test1"));
+                new cashGUI(tests);
             }
         });
         tiles.add(cash);

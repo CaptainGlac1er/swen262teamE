@@ -15,16 +15,15 @@ public class System extends JFrame implements ActionListener{
     JTextField passwordText; //password used later
     private static HashMap<String, Integer> userStorage; //storage for userdata
 
-    public static void main(String args[]) {
-
-        System fsystem = new System();
+    public System(){
+        //System fsystem = new System();
         JFrame frame = new JFrame("Demo application");
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         frame.add(panel);
-        fsystem.placeComponents(panel);
+        this.placeComponents(panel);
 
         frame.setVisible(true);
         userStorage = new HashMap<>();
