@@ -15,6 +15,10 @@ public class System extends JFrame implements ActionListener{
     JTextField passwordText; //password used later
     private static HashMap<String, Integer> userStorage; //storage for userdata
 
+    /**
+     * intiliazes user hashmap (calls LoadUsers) and the GUI
+     *
+     */
     public System(){
         //System fsystem = new System();
         JFrame frame = new JFrame("Demo application");
@@ -31,6 +35,9 @@ public class System extends JFrame implements ActionListener{
 
     }
 
+    /**
+     * Loads text file and puts them inro user info hashmap
+     */
     public static void LoadUsers(){
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
@@ -54,6 +61,10 @@ public class System extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * System GUI
+     * @param panel
+     */
     public void placeComponents(JPanel panel) {
 
         panel.setLayout(null);
@@ -89,7 +100,10 @@ public class System extends JFrame implements ActionListener{
 
     }
 
-
+    /**
+     * Action Listerner for Button presses
+     * @param e the event in this case either register or login
+     */
     public void actionPerformed(ActionEvent e) {
 
         JButton source = (JButton) e.getSource();
@@ -105,20 +119,34 @@ public class System extends JFrame implements ActionListener{
         }
     }
 
-
+    /**
+     * Checks if user info is correct and logs them in if it is
+     * else it gives an alert that the information was incorrect
+     * @param username
+     * @param password
+     */
     public void LoginAction(String username, String password){
-        new portfolio();
+
         if (PasswordCheck(username, password)){
             //load user portfolio
+            new portfolio();
+        }
+        else{
+            //incorrect password or username alert
         }
 
 
-
     }
+
+    /**
+     * Writes the user info into text file if it is new
+     * @param username
+     * @param password
+     */
     public void RegisterAction(String username, String password) {
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-        if (!checkfile.exists()) {
+        if (!checkfile.exists() && !userStorage.containsKey(username)) {
             try {
                 PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
                 writer.println("Username,Password");
@@ -142,6 +170,7 @@ public class System extends JFrame implements ActionListener{
 
         } else {
             //User already exists alert GUI
+            java.lang.System.out.print(("user already exists"));
         }
 
     }
