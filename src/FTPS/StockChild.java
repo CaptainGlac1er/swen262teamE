@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Josh on 3/3/2016.
  */
-public class StockChild extends StockParent {
+public class StockChild extends StockParent implements  Stock{
 
     private int stockCount;
     private String stockName;
