@@ -21,15 +21,7 @@ public class System extends JFrame implements ActionListener{
      */
     public System(){
         //System fsystem = new System();
-        JFrame frame = new JFrame("Demo application");
-        frame.setSize(300, 150);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-        this.placeComponents(panel);
-
-        frame.setVisible(true);
+        new systemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
 
@@ -71,45 +63,6 @@ public class System extends JFrame implements ActionListener{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * System GUI
-     * @param panel
-     */
-    public void placeComponents(JPanel panel) {
-
-        panel.setLayout(null);
-
-        JLabel userLabel = new JLabel("User");
-        userLabel.setBounds(10, 10, 80, 25);
-        panel.add(userLabel);
-
-        userText = new JTextField(20);
-        userText.setBounds(100, 10, 160, 25);
-        panel.add(userText);
-
-        JLabel passwordLabel = new JLabel("Password");
-        passwordLabel.setBounds(10, 40, 80, 25);
-        panel.add(passwordLabel);
-
-        passwordText = new JPasswordField(20);
-        passwordText.setBounds(100, 40, 160, 25);
-        panel.add(passwordText);
-
-        JButton loginButton = new JButton("login");
-        loginButton.setBounds(10, 80, 80, 25);
-        panel.add(loginButton);
-
-        JButton registerButton = new JButton("register");
-        registerButton.setBounds(180, 80, 80, 25);
-        panel.add(registerButton);
-
-        loginButton.addActionListener(this);
-        registerButton.addActionListener(this);
-        userText.addActionListener(this);
-        passwordText.addActionListener(this);
-
     }
 
     /**

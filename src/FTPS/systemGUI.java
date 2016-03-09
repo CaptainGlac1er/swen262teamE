@@ -13,7 +13,7 @@ public class systemGUI extends JFrame implements ActionListener{
     JTextField passwordText; //password used later
 
     public systemGUI(System system){
-
+        this.system = system;
         JFrame frame = new JFrame("Demo application");
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
