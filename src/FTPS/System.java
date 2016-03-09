@@ -31,7 +31,7 @@ public class System extends JFrame implements ActionListener{
 
         frame.setVisible(true);
         userStorage = new HashMap<>();
-        //LoadUsers();
+        LoadUsers();
 
     }
 
@@ -41,6 +41,18 @@ public class System extends JFrame implements ActionListener{
     public static void LoadUsers(){
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
+        if (!checkfile.exists()) {
+            try {
+                PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
+                writer.println("Username,Password");
+                writer.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             String currentLine;
             BufferedReader br = new BufferedReader(new FileReader(checkfile));
@@ -129,7 +141,7 @@ public class System extends JFrame implements ActionListener{
 
         if (PasswordCheck(username, password)){
             //load user portfolio
-            new portfolio();
+            //new portfolio();
         }
         else{
             //incorrect password or username alert
@@ -146,18 +158,18 @@ public class System extends JFrame implements ActionListener{
     public void RegisterAction(String username, String password) {
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-        if (!checkfile.exists() && !userStorage.containsKey(username)) {
-            try {
-                PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-                writer.println("Username,Password");
-                writer.close();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        //if (!checkfile.exists()) {
+        //    try {
+        //        PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
+        //        writer.println("Username,Password");
+        //        writer.close();
+//
+        //    } catch (FileNotFoundException e) {
+        //        e.printStackTrace();
+        //    } catch (IOException e) {
+        //        e.printStackTrace();
+        //    }
+        //}
 
         if (userStorage.isEmpty() || !userStorage.containsKey(username)) {
             userStorage.put(username, Hasher(password));
