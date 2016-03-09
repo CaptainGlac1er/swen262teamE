@@ -140,10 +140,15 @@ public class System extends JFrame implements ActionListener{
     public void LoginAction(String username, String password){
 
         if (PasswordCheck(username, password)){
+            JFileChooser f = new JFileChooser();
+            java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
+            User user = new User(username);
+            user.openPortfolio();
             //load user portfolio
             //new portfolio();
         }
         else{
+            java.lang.System.out.println("error logging in" + username);
             //incorrect password or username alert
         }
 

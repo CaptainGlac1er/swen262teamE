@@ -3,8 +3,6 @@ package FTPS;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.*;
-import java.lang.System;
 import java.util.ArrayList;
 
 /**
