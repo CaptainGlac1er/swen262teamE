@@ -1,6 +1,7 @@
 package FTPS;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by CaptainGlac1er on 2/28/2016.
@@ -9,14 +10,13 @@ import java.util.ArrayList;
 public class assets {
 
     //store different types of portfolio data
-    private ArrayList<StockChild> stockList;
-    private ArrayList<cashAccount> cashAccountList;
-    private ArrayList<Transactions> transactionsList;
+    private List<StockChild> stockList;
+    private List<cashAccount> cashAccountList;
+    private List<Transactions> transactionsList;
     private int accountCount = 0;
 
     //constructor, initialize storage
     public assets(){
-
         stockList = new ArrayList<StockChild>();
         cashAccountList = new ArrayList<cashAccount>();
         transactionsList = new ArrayList<Transactions>();
@@ -25,12 +25,12 @@ public class assets {
     public void AddCashAccount(double inWorth, String inName){
         //account
         cashAccount acct = new cashAccount(inWorth,inName);
-        cashAccountList.add(accountCount,acct);
+        cashAccountList.add(acct);
         accountCount++;
 
         //transaction
         String info = "Created Acoount: #"+ inName +", "+ inWorth;
-        Transactions transaction = new Transactions(info);
+        Transactions transaction = new Transactions("Account",info);
         transactionsList.add(transaction);
 
     }
@@ -38,7 +38,7 @@ public class assets {
     public void DelCashAccount(int inAccountIndex){
         //transaction
         String info = "Removed Acoount: #"+cashAccountList.get(inAccountIndex).GetAccountName() + ", "+cashAccountList.get(inAccountIndex).GetAccountWorth() ;
-        Transactions transaction = new Transactions(info);
+        Transactions transaction = new Transactions("Account",info);
         transactionsList.add(transaction);
 
         //account
@@ -46,16 +46,84 @@ public class assets {
     }
 
     //buy a stock,pay for it, store it and record it
-    public void AddStock(){
+    //currently takes in stock object, could take in each param of a stock and create a temp stock first thing
+    public void AddStock(double cost,int quantity, StockChild stock){
+        //check cash accounts sequentially
+        //if any acct worth > cost, remove cost
+        //add the stock to stock list, if exists, inc count
+        boolean trigger = false;
+        //for every account
+        for (int i = 0; i < cashAccountList.size(); i++) {
+            if(trigger == true){
+                break;
+            }
+            //check to see if have enough cash to buy
+            cashAccount acct = cashAccountList.get(i);
+            double worth = acct.GetAccountWorth();
+            boolean doTransaction = CheckValues(worth,cost);
+            //have enough cash
+            if (doTransaction == true) {
+                acct.RemoveCash(cost);
+                if(stockList.contains(stock)){
+                    int position =stockList.indexOf(stock);
+                    StockChild tempStock = stockList.get(position);
+                    tempStock.IncCount(quantity);
+                    stockList.set(position,tempStock);
+                    String count = Integer.toString(stock.GetCount());
+                    String amt = Double.toString(stock.getWorth());
+                    String info = ("Bought Stock"+ stock.getStockAbbr() +",Valued at: $"+ amt + "Quantity #: " + count) ;
+                    Transactions transaction = new Transactions("Stock",info);
+                    transactionsList.add(transaction);
+                }
+                else{
+                   stockList.add(stock);
+                    String count = Integer.toString(stock.GetCount());
+                    String amt = Double.toString(stock.getWorth());
+                    String info = ("Bought Stock "+ stock.getStockAbbr() +", Valued at: $"+ amt + ", Quantity #: " + count) ;
+                    Transactions transaction = new Transactions("Stock",info);
+                    transactionsList.add(transaction);
+                }
+                trigger = true;
+            }
+        }
 
     }
+
     //sell a stock,get paid for it, remove it and record it
-    public void DelStock(){
-
+    //currently takes in stock object, could take in each param of a stock and create a temp stock first thing
+    public void DelStock(StockChild stock, int numSold){
+        //get stock worth
+        //add stock worth to an acct
+        //remove stock from stocklist
+        int acctSize = cashAccountList.size();
+        if(acctSize > 0){
+                 double worth = stock.getWorth() * numSold;
+                cashAccount tempAcct = cashAccountList.get(0);
+                tempAcct.AddCash(worth);
+                cashAccountList.set(0, tempAcct);
+                stockList.remove(stock);
+                String count = Integer.toString(numSold);
+                String amt = Double.toString(stock.getWorth());
+                String info = ("Sold Stock " + stock.getStockAbbr() + ", Valued at: $" + amt + ", Quantity #: " + count);
+                Transactions transaction = new Transactions("Stock", info);
+                transactionsList.add(transaction);
+        }
     }
-
+    //helper function to reduce clutter
+    public boolean CheckValues(double valAcct, double valCost){
+        if(valCost <= valAcct) {
+            return true;
+        }
+        else return false;
+    }
     //return all of the assets
-    public void GetAssets(){
-
+    public List<StockChild> GetStocks(){
+        return  stockList;
+    }
+    public List<cashAccount> GetAccounts(){
+        return cashAccountList;
+    }
+    public List<Transactions> GetTransactions(){
+        return  transactionsList;
     }
 }

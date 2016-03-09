@@ -29,11 +29,11 @@ public class cashAccount {
         double worthTemp = accountWorth;
         return worthTemp;
     }
-    public void AddCash(double amount){
-        accountWorth += amount;
+    public void AddCash(double inAmount){
+        accountWorth += inAmount;
 
     }
-    public void RmoveCash(double amount){
-        accountWorth -= amount;
+    public void RemoveCash(double inAmount){
+        accountWorth -= inAmount;
     }
 }
