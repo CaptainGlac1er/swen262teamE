@@ -7,13 +7,14 @@ import java.time.LocalTime;
 public class Transactions {
     //what will we do for storing time?
     private String transInfo;
+    private String transType;
     private String dateTime;
     private int day;
     private int month;
     private int year;
     private String time;
 
-    Transactions(String type){
+    Transactions(String type, String info){
         LocalDateTime timePoint = LocalDateTime.now();
         month = timePoint.getMonthValue();
         day = timePoint.getDayOfMonth();
@@ -21,7 +22,8 @@ public class Transactions {
         LocalTime timeTemp = timePoint.toLocalTime();
         time = timeTemp.toString();
         dateTime = month + "/"+day+"/"+year+"  At:" + time;
-        transInfo = type;
+        transInfo = info;
+        transType = type;
     }
     public String getTime(){
         String outTime = dateTime;
