@@ -3,14 +3,15 @@ package FTPS;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
 public class cashGUI extends JFrame {
-    private ArrayList<cashAccount> cashAccounts;
-    public cashGUI(ArrayList<cashAccount> cashAccounts){
+    private List<cashAccount> cashAccounts;
+    public cashGUI(List<cashAccount> cashAccounts){
         this.cashAccounts = cashAccounts;
         JLabel testLabel = new JLabel("Test User");
         this.add(testLabel, BorderLayout.NORTH);

@@ -7,17 +7,17 @@ import java.util.List;
  * Created by CaptainGlac1er on 2/28/2016.
  */
 //portfolio contents
-public class assets {
+public class Assets {
 
     //store different types of portfolio data
-    private List<StockChild> stockList;
+    private List<Stock> stockList;
     private List<cashAccount> cashAccountList;
     private List<Transactions> transactionsList;
     private int accountCount = 0;
 
     //constructor, initialize storage
-    public assets(){
-        stockList = new ArrayList<StockChild>();
+    public Assets(){
+        stockList = new ArrayList<Stock>();
         cashAccountList = new ArrayList<cashAccount>();
         transactionsList = new ArrayList<Transactions>();
     }
@@ -45,9 +45,10 @@ public class assets {
         cashAccountList.remove(inAccountIndex);
     }
 
-    //buy a stock,pay for it, store it and record it
-    //currently takes in stock object, could take in each param of a stock and create a temp stock first thing
-    public void AddStock(double cost,int quantity, StockChild stock){
+    //buy a stock,pay for it, store it and record itin each param of a stock and create a temp stock first thing
+    public void AddStock(int quantity, Stock stock){
+    //currently takes in stock object, could take ){
+        double cost = stock.getWorth();
         //check cash accounts sequentially
         //if any acct worth > cost, remove cost
         //add the stock to stock list, if exists, inc count
@@ -66,7 +67,7 @@ public class assets {
                 acct.RemoveCash(cost);
                 if(stockList.contains(stock)){
                     int position =stockList.indexOf(stock);
-                    StockChild tempStock = stockList.get(position);
+                    Stock tempStock = stockList.get(position);
                     tempStock.IncCount(quantity);
                     stockList.set(position,tempStock);
                     String count = Integer.toString(stock.GetCount());
@@ -116,8 +117,8 @@ public class assets {
         }
         else return false;
     }
-    //return all of the assets
-    public List<StockChild> GetStocks(){
+    //return all of the Assets
+    public List<Stock> GetStocks(){
         return  stockList;
     }
     public List<cashAccount> GetAccounts(){

@@ -13,7 +13,7 @@ public interface Stock {
     public void removeIndexStock(StockChild s);
     //Return total worth of owned stock
     public double GetTotWorth();
-
+    public double getWorth();
     //Return the count of stocks owned
     public int GetCount();
 
