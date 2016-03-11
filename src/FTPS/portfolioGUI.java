@@ -15,6 +15,7 @@ public class portfolioGUI extends JFrame {
     User user;
     portfolio port;
     public portfolioGUI(User user, portfolio port){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
         JLabel testLabel = new JLabel("Test User");

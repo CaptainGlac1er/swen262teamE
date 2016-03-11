@@ -3,6 +3,7 @@ package FTPS;
 import javax.swing.*;
 import java.io.*;
 import java.lang.*;
+import java.lang.System;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -43,6 +44,7 @@ public class portfolio {
                 writer.println("1");
                 writer.println("1");
                 writer.println("a");
+                writer.println("Main");
                 writer.println("0");
                 writer.close();
 
@@ -56,20 +58,23 @@ public class portfolio {
             String currentLine;
             //BufferedReader br = new BufferedReader(new FileReader(checkfile));
             Scanner scanner = new Scanner(checkfile);
-            int topLevelEntries = scanner.nextInt();
+            int topLevelEntries = Integer.parseInt(scanner.nextLine());
             for(int a = 0; a < topLevelEntries; a++){
-                int amount = scanner.nextInt();
+                int amount = Integer.parseInt(scanner.nextLine());
                 for(int b = 0; b < amount; b++) {
-                    char type = scanner.next().charAt(0);
+
+                    String input = scanner.nextLine();
+                    System.out.println("reading " + input);
+                    char type = input.charAt(0);
                     switch (type) {
                         case 'a':
                             String accountName = scanner.nextLine();
-                            double balance = scanner.nextDouble();
+                            double balance = Double.parseDouble(scanner.nextLine());
                             assets.AddCashAccount(balance, accountName);
                             break;
                         case 's':
                             String ticker = scanner.nextLine();
-                            int count = scanner.nextInt();
+                            int count = Integer.parseInt(scanner.nextLine());
                             assets.AddStock(count,portEngine.search(ticker));
                             break;
                     }
