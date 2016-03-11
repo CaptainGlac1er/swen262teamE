@@ -22,7 +22,7 @@ public class System{
      */
     public System(){
         //System fsystem = new System();
-        new systemGUI(this);
+        new SystemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
         getAllStocks();

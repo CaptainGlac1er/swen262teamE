@@ -10,17 +10,17 @@ import java.util.Scanner;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class portfolio {
+public class Portfolio {
     User user;
-    assets assets = new assets();
+    Assets assets = new Assets();
     PortEngine portEngine;
-    public portfolio(User user){
+    public Portfolio(User user){
         this.portEngine = new PortEngine();
         this.user = user;
         loadPortfolio();
         new portfolioGUI(user, this);
     }
-    public assets getAssets(){
+    public Assets getAssets(){
         return assets;
     }
     public void createAsset(){
@@ -32,22 +32,27 @@ public class portfolio {
     public void getUser(String username){
 
     }
+    //handle buying stock, call invoker
     public void buyStock(StockChild inStock, int inQuantity){
         BuyStock bStock = new BuyStock(assets,inStock,inQuantity);
         placeOrder(bStock);
     }
+    //handle selling stock, call invoker
     public void sellStock(StockChild inStock, int inNumSold){
         RemoveStock rStock = new RemoveStock(assets,inStock,inNumSold);
         placeOrder(rStock);
     }
+    //handle cash account creation, call invoker
     public void addAcct(double inWorth, String inName){
         MakeAccount mAcct = new MakeAccount(assets,inWorth,inName);
         placeOrder(mAcct);
     }
+    //handle cass account removal, call invoker
     public void remAcct(int inIndex){
-        RemoveAccount rAcct = new RemoveAccount(assets,inIndex);
+        RemoveAccount rAcct = new RemoveAccount(assets, inIndex);
         placeOrder(rAcct);
     }
+    //command invoker
     public void placeOrder(Order order) {
         order.execute();
     }

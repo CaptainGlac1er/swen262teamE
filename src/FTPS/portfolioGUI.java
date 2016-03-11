@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
-public class portfolioGUI extends JFrame {
+public class PortfolioGUI extends JFrame {
     User user;
-    portfolio port;
-    public portfolioGUI(User user, portfolio port){
+    Portfolio port;
+    public PortfolioGUI(User user, Portfolio port){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
@@ -26,8 +26,8 @@ public class portfolioGUI extends JFrame {
         cash.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<cashAccount> tests = port.getAssets().GetAccounts();
-                new cashGUI(tests);
+                List<CashAccount> tests = port.getAssets().GetAccounts();
+                new CashGUI(tests);
             }
         });
         tiles.add(cash);

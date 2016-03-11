@@ -3,16 +3,19 @@ package FTPS;
 /**
  * Created by ajg72 on 3/10/2016.
  */
+//concrete class for making cash accounts
 public class MakeAccount implements  Order {
-        private assets asset;
+        //needed data
+        private Assets asset;
         private double worth;
         private String name;
-        public MakeAccount(assets inAsset, double inWorth, String inName){
+        //constructor, sets data
+        public MakeAccount(Assets inAsset, double inWorth, String inName){
             worth = inWorth;
             name = inName;
-            this.asset = inAsset;
+            asset = inAsset;
         }
-
+        //handles execute call
         public void execute() {
             asset.AddCashAccount(worth,name);
         }

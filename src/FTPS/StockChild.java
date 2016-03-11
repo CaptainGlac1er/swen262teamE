@@ -6,8 +6,9 @@ import java.util.List;
 /**
  * Created by Josh on 3/3/2016.
  */
+//concrete class for stock composition, also component
 public class StockChild implements  Stock{
-
+    //needed data for a composite stock
     private int stockCount;
     private String stockName;
     private String stockAbbr;
@@ -23,42 +24,47 @@ public class StockChild implements  Stock{
         stockIndex = inIndex;
         indexStocks = new ArrayList<StockChild>();
     }
+    //get stock children
     public List<StockChild> getIndexStocks(){
         return indexStocks;
     }
+    //add child
     public void addIndexStock(StockChild s){
         indexStocks.add(s);
     }
+    //remove child
     public void removeIndexStock(StockChild s){
         indexStocks.remove(s);
     }
     //Return total worth of owned stock
-    public double GetTotWorth() {
+    public double getTotWorth() {
         return (stockWorth * stockCount);
     }
-    public double GetWorth() {
+    //return worth of one stock
+    public double getWorth() {
     return stockWorth;
     }
+    //return stock name
     public String getStockName(){
         return stockName;
     }
     //Return the count of stocks owned
-    public int GetCount(){
+    public int getCount(){
         return stockCount;
     }
-
     //Increment the count of stocks owned
-    public void IncCount(int quantity){
+    public void incCount(int quantity){
         stockCount+=quantity;
     }
     //Decrement the count of stocks owned
-    //override for an amt
-    public void DecCount(int quantity) {
+    public void decCount(int quantity) {
         stockCount -= quantity;
     }
+    //return stock abbreviation
     public String getStockAbbr(){
         return  stockAbbr;
     }
+    //return stock index name
     public String getStockIndex(){
         return stockIndex;
     }
