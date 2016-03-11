@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class portfolio {
     User user;
-    Assets assets = new Assets();
+    assets assets = new assets();
     PortEngine portEngine;
     public portfolio(User user){
         this.portEngine = new PortEngine();
@@ -20,7 +20,7 @@ public class portfolio {
         loadPortfolio();
         new portfolioGUI(user, this);
     }
-    public Assets getAssets(){
+    public assets getAssets(){
         return assets;
     }
     public void createAsset(){
@@ -31,6 +31,25 @@ public class portfolio {
     }
     public void getUser(String username){
 
+    }
+    public void buyStock(StockChild inStock, int inQuantity){
+        BuyStock bStock = new BuyStock(assets,inStock,inQuantity);
+        placeOrder(bStock);
+    }
+    public void sellStock(StockChild inStock, int inNumSold){
+        RemoveStock rStock = new RemoveStock(assets,inStock,inNumSold);
+        placeOrder(rStock);
+    }
+    public void addAcct(double inWorth, String inName){
+        MakeAccount mAcct = new MakeAccount(assets,inWorth,inName);
+        placeOrder(mAcct);
+    }
+    public void remAcct(int inIndex){
+        RemoveAccount rAcct = new RemoveAccount(assets,inIndex);
+        placeOrder(rAcct);
+    }
+    public void placeOrder(Order order) {
+        order.execute();
     }
     public boolean loadPortfolio(){
         JFileChooser f = new JFileChooser();

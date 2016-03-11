@@ -8,24 +8,22 @@ package FTPS;
  */
 public interface Stock {
 
-    public List<StockChild> getIndexStocks();
-    public void addIndexStock(StockChild s);
-    public void removeIndexStock(StockChild s);
+    List<StockChild> getIndexStocks();
+    void addIndexStock(StockChild s);
+    void removeIndexStock(StockChild s);
     //Return total worth of owned stock
-    public double GetTotWorth();
-    public double getWorth();
+    double GetTotWorth();
+    double GetWorth();
     //Return the count of stocks owned
-    public int GetCount();
+    int GetCount();
 
     //Increment the count of stocks owned
-    public void IncCount();
     //override for an amt
-    public void IncCount(int quantity);
+    void IncCount(int quantity);
     //Decrement the count of stocks owned
-    public void DecCount();
     //override for an amt
-    public void DecCount(int quantity);
-    public String getStockAbbr();
-    public String getStockIndex();
+    //void DecCount(int quantity);
+    String getStockAbbr();
+    String getStockIndex();
 
 }

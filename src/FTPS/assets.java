@@ -7,7 +7,7 @@ import java.util.List;
  * Created by CaptainGlac1er on 2/28/2016.
  */
 //portfolio contents
-public class Assets {
+public class assets {
 
     //store different types of portfolio data
     private List<Stock> stockList;
@@ -16,7 +16,7 @@ public class Assets {
     private int accountCount = 0;
 
     //constructor, initialize storage
-    public Assets(){
+    public assets(){
         stockList = new ArrayList<Stock>();
         cashAccountList = new ArrayList<cashAccount>();
         transactionsList = new ArrayList<Transactions>();
@@ -47,8 +47,9 @@ public class Assets {
 
     //buy a stock,pay for it, store it and record itin each param of a stock and create a temp stock first thing
     public void AddStock(int quantity, Stock stock){
-    //currently takes in stock object, could take ){
-        double cost = stock.getWorth();
+    //currently takes in stock object, could take
+        stock.IncCount(quantity);
+        double cost = stock.GetTotWorth();
         //check cash accounts sequentially
         //if any acct worth > cost, remove cost
         //add the stock to stock list, if exists, inc count
@@ -71,7 +72,7 @@ public class Assets {
                     tempStock.IncCount(quantity);
                     stockList.set(position,tempStock);
                     String count = Integer.toString(stock.GetCount());
-                    String amt = Double.toString(stock.getWorth());
+                    String amt = Double.toString(stock.GetWorth());
                     String info = ("Bought Stock"+ stock.getStockAbbr() +",Valued at: $"+ amt + "Quantity #: " + count) ;
                     Transactions transaction = new Transactions("Stock",info);
                     transactionsList.add(transaction);
@@ -79,7 +80,7 @@ public class Assets {
                 else{
                    stockList.add(stock);
                     String count = Integer.toString(stock.GetCount());
-                    String amt = Double.toString(stock.getWorth());
+                    String amt = Double.toString(stock.GetWorth());
                     String info = ("Bought Stock "+ stock.getStockAbbr() +", Valued at: $"+ amt + ", Quantity #: " + count) ;
                     Transactions transaction = new Transactions("Stock",info);
                     transactionsList.add(transaction);
@@ -98,13 +99,19 @@ public class Assets {
         //remove stock from stocklist
         int acctSize = cashAccountList.size();
         if(acctSize > 0){
-                 double worth = stock.getWorth() * numSold;
+
+                 double worth = stock.GetWorth() * numSold;
                 cashAccount tempAcct = cashAccountList.get(0);
                 tempAcct.AddCash(worth);
                 cashAccountList.set(0, tempAcct);
-                stockList.remove(stock);
+                if(numSold == stock.GetCount()){
+                    stockList.remove(stock);
+                }
+                else{
+                    stock.DecCount(numSold);
+                }
                 String count = Integer.toString(numSold);
-                String amt = Double.toString(stock.getWorth());
+                String amt = Double.toString(stock.GetWorth());
                 String info = ("Sold Stock " + stock.getStockAbbr() + ", Valued at: $" + amt + ", Quantity #: " + count);
                 Transactions transaction = new Transactions("Stock", info);
                 transactionsList.add(transaction);

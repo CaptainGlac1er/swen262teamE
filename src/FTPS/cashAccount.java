@@ -16,8 +16,6 @@ public class cashAccount {
         accountName = inName;
         accountWorth = inWorth;
     }
-    public cashAccount(User u){
-    }
 
     //return the name of Acct
     public String GetAccountName(){
