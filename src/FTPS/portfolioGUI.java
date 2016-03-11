@@ -4,19 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
 public class portfolioGUI extends JFrame {
     User user;
-    portfolio port;
-    public portfolioGUI(User user, portfolio port){
-        this.port = port;
+    public portfolioGUI(User user){
         this.user = user;
+    }
+    public portfolioGUI(){
+        portfolio portfolio = new portfolio();
         JLabel testLabel = new JLabel("Test User");
         this.add(testLabel, BorderLayout.NORTH);
 
@@ -25,7 +25,9 @@ public class portfolioGUI extends JFrame {
         cash.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<cashAccount> tests = port.getAssets().GetAccounts();
+                ArrayList<cashAccount> tests = new ArrayList<cashAccount>();
+
+                tests.add(new cashAccount(123, "Test1"));
                 new cashGUI(tests);
             }
         });

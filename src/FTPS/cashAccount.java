@@ -5,7 +5,7 @@ package FTPS;
  */
 
 //user cash accounts
-public class cashAccount {
+public class cashAccount{
 
     //name and value
     private double accountWorth;
