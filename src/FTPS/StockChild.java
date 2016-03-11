@@ -37,8 +37,10 @@ public class StockChild implements  Stock{
         return (stockWorth * stockCount);
     }
     public double GetWorth() {
-
     return stockWorth;
+    }
+    public String getStockName(){
+        return stockName;
     }
     //Return the count of stocks owned
     public int GetCount(){
