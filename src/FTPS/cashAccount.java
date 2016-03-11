@@ -1,15 +1,21 @@
 package FTPS;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
 
 //user cash accounts
-public class cashAccount {
+public class cashAccount{
 
     //name and value
     private double accountWorth;
     private String accountName;
+
+    ArrayList<Component> componentsToUpdate = new ArrayList<>();
 
     //constructor for cashAccounts, name and value set
     public cashAccount(double inWorth, String inName){
@@ -29,9 +35,19 @@ public class cashAccount {
     }
     public void AddCash(double inAmount){
         accountWorth += inAmount;
+        update();
 
     }
     public void RemoveCash(double inAmount){
         accountWorth -= inAmount;
+        update();
+    }
+    public void update(){
+        for(Component c: componentsToUpdate){
+            ((JLabel)c).setText(accountWorth + "");
+        }
+    }
+    public void addAccountBalanceViewer(Component component){
+        componentsToUpdate.add(component);
     }
 }

@@ -3,6 +3,8 @@ package FTPS;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class cashGUI extends JFrame {
         this.add(getAccountsList(), BorderLayout.CENTER);
 
 
-        this.setSize(300,400);
+        this.setSize(600,300);
         setVisible(true);
 
     }
@@ -27,8 +29,29 @@ public class cashGUI extends JFrame {
         for(cashAccount account : cashAccounts){
             JLabel name = new JLabel(account.GetAccountName());
             JLabel balance = new JLabel(account.GetAccountWorth() + "");
+            JTextField change = new JTextField("");
+            JButton deposit = new JButton("Deposit");
+            JButton withdraw = new JButton("Withdraw");
+            account.addAccountBalanceViewer(balance);
+            deposit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Double amount = Double.parseDouble(change.getText());
+                    account.AddCash(amount);
+                }
+            });
+            withdraw.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Double amount = Double.parseDouble(change.getText());
+                    account.RemoveCash(amount);
+                }
+            });
             panel.add(name);
             panel.add(balance);
+            panel.add(change);
+            panel.add(deposit);
+            panel.add(withdraw);
 
         }
         return panel;
