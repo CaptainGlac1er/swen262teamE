@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class System extends JFrame implements ActionListener{
+public class System{
     JTextField userText; //username used later
     JTextField passwordText; //password used later
     private static HashMap<String, Integer> userStorage; //storage for userdata
@@ -62,25 +62,6 @@ public class System extends JFrame implements ActionListener{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Action Listerner for Button presses
-     * @param e the event in this case either register or login
-     */
-    public void actionPerformed(ActionEvent e) {
-
-        JButton source = (JButton) e.getSource();
-        String password = passwordText.getText();
-        String user = userText.getText();
-        switch(source.getText()){
-            case "login":
-                LoginAction(user, password);
-                break;
-            case "register":
-                RegisterAction(user, password);
-                break;
         }
     }
 

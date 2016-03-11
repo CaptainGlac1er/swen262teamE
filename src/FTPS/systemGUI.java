@@ -14,7 +14,7 @@ public class systemGUI extends JFrame implements ActionListener{
 
     public systemGUI(System system){
         this.system = system;
-        JFrame frame = new JFrame("Demo application");
+        JFrame frame = this;
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -70,6 +70,8 @@ public class systemGUI extends JFrame implements ActionListener{
         switch(source.getText()){
             case "login":
                 system.LoginAction(user, password);
+                this.setVisible(false);
+                this.dispose();
                 break;
             case "register":
                 system.RegisterAction(user, password);
