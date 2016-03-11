@@ -19,6 +19,10 @@ public interface Stock {
     double getTotWorth();
     //return worth of one stock
     double getWorth();
+    //set the stock worth (projections)
+    void setProjWorth(double inWorth);
+
+    double getProjWorth();
     //Return the count of stocks owned
     int getCount();
     //Increment the count of stocks owned

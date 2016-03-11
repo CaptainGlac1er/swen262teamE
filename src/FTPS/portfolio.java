@@ -18,7 +18,7 @@ public class Portfolio {
         this.portEngine = new PortEngine();
         this.user = user;
         loadPortfolio();
-        new portfolioGUI(user, this);
+        new PortfolioGUI(user, this);
     }
     public Assets getAssets(){
         return assets;

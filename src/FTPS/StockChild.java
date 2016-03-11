@@ -14,6 +14,7 @@ public class StockChild implements  Stock{
     private String stockAbbr;
     private String stockIndex;
     private double stockWorth;
+    private double projWorth;
     private List<StockChild> indexStocks;
 
     public StockChild (String inName, String inAbbr, String inIndex, int inCount, double inWorth){
@@ -23,6 +24,7 @@ public class StockChild implements  Stock{
         stockWorth = inWorth;
         stockIndex = inIndex;
         indexStocks = new ArrayList<StockChild>();
+        projWorth = 0;
     }
     //get stock children
     public List<StockChild> getIndexStocks(){
@@ -51,6 +53,12 @@ public class StockChild implements  Stock{
     //Return the count of stocks owned
     public int getCount(){
         return stockCount;
+    }
+    public void setProjWorth(double inWorth){
+       projWorth = inWorth;
+    }
+    public double getProjWorth(){
+        return projWorth;
     }
     //Increment the count of stocks owned
     public void incCount(int quantity){
