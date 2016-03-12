@@ -19,6 +19,19 @@ public class StockParent {
     }
 
     public void setWorth(double inWorth ){ stockWorth = inWorth; }
+
+    public String getStockName() {
+        return ("Index :" + stockName);
+    }
+
+    public String getStockIndex() {
+        return ("Index :" + stockIndex);
+    }
+
+    public String getStockAbbr() {
+        return ("Abbr :" + stockAbbr);
+    }
+
     public double getWorth(){
         return stockWorth;
     }
