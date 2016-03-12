@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class systemGUI extends JFrame implements ActionListener{
+public class SystemGUI extends JFrame implements ActionListener{
     System system;
     JTextField userText; //username used later
     JTextField passwordText; //password used later
 
-    public systemGUI(System system){
+    public SystemGUI(System system){
         this.system = system;
         JFrame frame = this;
         frame.setSize(300, 150);
