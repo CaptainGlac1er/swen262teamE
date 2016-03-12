@@ -1,39 +1,57 @@
 package FTPS;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
 
 //user cash accounts
-public class cashAccount {
+public class CashAccount{
 
     //name and value
     private double accountWorth;
     private String accountName;
 
+    ArrayList<Component> componentsToUpdate = new ArrayList<>();
+
     //constructor for cashAccounts, name and value set
-    public cashAccount(double inWorth, String inName){
+    public CashAccount(double inWorth, String inName){
         accountName = inName;
         accountWorth = inWorth;
     }
-    public cashAccount(User u){
-    }
 
     //return the name of Acct
-    public String GetAccountName(){
+    public String getAccountName(){
         String nameTemp = accountName;
         return nameTemp;
     }
     //return the value of the Acct
-    public double GetAccountWorth() {
+    public double getAccountWorth() {
         double worthTemp = accountWorth;
         return worthTemp;
     }
-    public void AddCash(double inAmount){
+
+    //add money
+    public void addCash(double inAmount){
         accountWorth += inAmount;
+        update();
 
     }
-    public void RemoveCash(double inAmount){
+    //remove money
+    public void removeCash(double inAmount){
         accountWorth -= inAmount;
+        update();
+    }
+    //update gui
+    public void update(){
+        for(Component c: componentsToUpdate){
+            ((JLabel)c).setText(accountWorth + "");
+        }
+    }
+    public void addAccountBalanceViewer(Component component){
+        componentsToUpdate.add(component);
     }
 }

@@ -5,25 +5,27 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.*;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class System extends JFrame implements ActionListener{
+public class System{
     JTextField userText; //username used later
     JTextField passwordText; //password used later
     private static HashMap<String, Integer> userStorage; //storage for userdata
-
+    public static ArrayList<StockChild> AllStocks = new ArrayList<>();
     /**
      * intiliazes user hashmap (calls LoadUsers) and the GUI
      *
      */
     public System(){
         //System fsystem = new System();
-        new systemGUI(this);
+        new SystemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
+        getAllStocks();
 
     }
 
@@ -62,25 +64,6 @@ public class System extends JFrame implements ActionListener{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Action Listerner for Button presses
-     * @param e the event in this case either register or login
-     */
-    public void actionPerformed(ActionEvent e) {
-
-        JButton source = (JButton) e.getSource();
-        String password = passwordText.getText();
-        String user = userText.getText();
-        switch(source.getText()){
-            case "login":
-                LoginAction(user, password);
-                break;
-            case "register":
-                RegisterAction(user, password);
-                break;
         }
     }
 
@@ -162,6 +145,34 @@ public class System extends JFrame implements ActionListener{
             }
         }
         return false;
+    }
+
+    public static ArrayList<StockChild> getAllStocks(){
+        String filepath = java.lang.System.getProperty("user.dir") + "\\src\\equities.csv";
+        try {
+            String currentLine;
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+
+            while((currentLine = br.readLine()) != null) {
+                java.lang.System.out.println(currentLine);
+                String[] info = currentLine.split("\"");
+                java.lang.System.out.println(info[5]);
+                StockChild currentStock = new StockChild(info[3], info[1], info[7], 0, Double.parseDouble(info[5]));
+                AllStocks.add(currentStock);
+            }
+
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (NumberFormatException e){
+            e.printStackTrace();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return AllStocks;
     }
 
 }
