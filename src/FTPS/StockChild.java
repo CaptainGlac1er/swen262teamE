@@ -14,10 +14,6 @@ public class StockChild extends StockParent implements Stock {
     public StockChild(String inName, String inAbbr, String inIndex, int inCount, double inWorth) {
         super(inName, inAbbr, inIndex, inWorth);
         stockCount = inCount;
-        stockName = inName;
-        stockAbbr = inAbbr;
-        stockWorth = inWorth;
-        stockIndex = inIndex;
         indexStocks = new ArrayList<StockChild>();
     }
 
@@ -43,19 +39,9 @@ public class StockChild extends StockParent implements Stock {
         return stockCount;
     }
 
-    //Increment the count of stocks owned
-    public void IncCount() {
-        stockCount++;
-    }
-
     //override for an amt
     public void IncCount(int quantity) {
         stockCount += quantity;
-    }
-
-    //Decrement the count of stocks owned
-    public void DecCount() {
-        stockCount--;
     }
 
     //override for an amt
@@ -63,14 +49,5 @@ public class StockChild extends StockParent implements Stock {
         stockCount -= quantity;
     }
 
-    public String getStockAbbr() {
-        return ("Abbr :" + stockAbbr);
-    }
-
-    public String getStockIndex() {
-        return ("Index :" + stockIndex);
-    }
-
-    public
 
 }
