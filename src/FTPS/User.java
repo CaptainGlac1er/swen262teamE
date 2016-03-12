@@ -9,23 +9,24 @@ import java.io.*;
 public class User {
     private String username;
     private String password; //the hashed password
-    private portfolio port;
+    private Portfolio port;
 
     public User(String username){
         this.username = username;
     }
 
-    public portfolio exportPortfolio(){
+    public Portfolio exportPortfolio(){
         return null;
     }
-    public void importPortolio(portfolio portfolio) {
+    public void importPortolio(Portfolio portfolio) {
 
     }
     public String getUsername(){
         return username;
     }
     public boolean openPortfolio(){
-        new portfolio(this);
+        new Portfolio(this);
         return true;
     }
+
 }

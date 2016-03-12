@@ -11,14 +11,14 @@ import java.util.List;
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
-public class portfolioGUI extends JFrame {
+public class PortfolioGUI extends JFrame {
     User user;
-    portfolio port;
-    public portfolioGUI(User user, portfolio port){
+    Portfolio port;
+    public PortfolioGUI(User user, Portfolio port){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
-        JLabel testLabel = new JLabel("Test User");
+        JLabel testLabel = new JLabel(user.getUsername());
         this.add(testLabel, BorderLayout.NORTH);
 
         JPanel tiles = new JPanel(new GridLayout(2,2));
@@ -26,8 +26,8 @@ public class portfolioGUI extends JFrame {
         cash.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<cashAccount> tests = port.getAssets().GetAccounts();
-                new cashGUI(tests);
+                List<CashAccount> tests = port.getAssets().GetAccounts();
+                new CashGUI(tests);
             }
         });
         tiles.add(cash);
@@ -39,6 +39,15 @@ public class portfolioGUI extends JFrame {
         tiles.add(pred);
         this.add(tiles, BorderLayout.CENTER);
 
+        JButton saveButton = new JButton("Save Portfolio");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                port.savePortfolio();
+                JOptionPane.showMessageDialog(null, "Portfolio saved");
+            }
+        });
+        this.add(saveButton, BorderLayout.SOUTH);
         this.setSize(300,400);
         setVisible(true);
     }

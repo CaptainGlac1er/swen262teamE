@@ -1,31 +1,39 @@
 
 package FTPS;
 
-        import java.util.List;
+import java.util.List;
 
 /**
  * Created by Josh on 3/3/2016.
  */
+//interface for composite stocks
 public interface Stock {
-
-    public List<StockChild> getIndexStocks();
-    public void addIndexStock(StockChild s);
-    public void removeIndexStock(StockChild s);
+    //stock methods
+    //return index
+    List<StockChild> getIndexStocks();
+    //add index
+    void addIndexStock(StockChild s);
+    //remove index
+    void removeIndexStock(StockChild s);
     //Return total worth of owned stock
-    public double GetTotWorth();
-    public double getWorth();
-    //Return the count of stocks owned
-    public int GetCount();
+    double getTotWorth();
+    //return worth of one stock
+    double getWorth();
+    //set the stock worth (projections)
+    void setProjWorth(double inWorth);
 
+    double getProjWorth();
+    //Return the count of stocks owned
+    int getCount();
     //Increment the count of stocks owned
-    public void IncCount();
-    //override for an amt
-    public void IncCount(int quantity);
+    void incCount(int quantity);
     //Decrement the count of stocks owned
-    public void DecCount();
-    //override for an amt
-    public void DecCount(int quantity);
-    public String getStockAbbr();
-    public String getStockIndex();
+    void decCount(int quantity);
+    //return stock name
+    String getStockName();
+    //return stock abbreviation
+    String getStockAbbr();
+    //return stock index
+    String getStockIndex();
 
 }
