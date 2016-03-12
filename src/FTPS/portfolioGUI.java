@@ -18,7 +18,7 @@ public class PortfolioGUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
-        JLabel testLabel = new JLabel("Test User");
+        JLabel testLabel = new JLabel(user.getUsername());
         this.add(testLabel, BorderLayout.NORTH);
 
         JPanel tiles = new JPanel(new GridLayout(2,2));
@@ -39,6 +39,15 @@ public class PortfolioGUI extends JFrame {
         tiles.add(pred);
         this.add(tiles, BorderLayout.CENTER);
 
+        JButton saveButton = new JButton("Save Portfolio");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                port.savePortfolio();
+                JOptionPane.showMessageDialog(null, "Portfolio saved");
+            }
+        });
+        this.add(saveButton, BorderLayout.SOUTH);
         this.setSize(300,400);
         setVisible(true);
     }

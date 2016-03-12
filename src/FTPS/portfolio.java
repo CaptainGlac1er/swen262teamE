@@ -125,4 +125,28 @@ public class Portfolio {
         }
         return true;
     }
+    public void savePortfolio(){
+        JFileChooser f = new JFileChooser();
+        File dir = new File(f.getCurrentDirectory().toString().concat("\\Users"));
+        java.lang.System.out.println(dir.getAbsolutePath());
+        dir.mkdir();
+        File checkfile = new File(dir, user.getUsername() + "Port.txt");
+        try {
+            PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
+            writer.println("1");
+            int accountCount = assets.GetAccounts().size();
+            writer.println(accountCount);
+            for(CashAccount a : assets.GetAccounts()) {
+                writer.println("a");
+                writer.println(a.getAccountName());
+                writer.println(a.getAccountWorth());
+            }
+            writer.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

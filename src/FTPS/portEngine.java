@@ -60,4 +60,7 @@ public class PortEngine {
         worth = 0;
         projectedStocks.clear();
     }
+    public Stock search(String searchString){
+        return null;
+    }
 }
