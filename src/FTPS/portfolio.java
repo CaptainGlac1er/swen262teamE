@@ -125,12 +125,26 @@ public class Portfolio {
         }
         return true;
     }
-    public void savePortfolio(){
+    public void exportPortfolio(boolean ifCustomSave){
         JFileChooser f = new JFileChooser();
-        File dir = new File(f.getCurrentDirectory().toString().concat("\\Users"));
-        java.lang.System.out.println(dir.getAbsolutePath());
-        dir.mkdir();
-        File checkfile = new File(dir, user.getUsername() + "Port.txt");
+        if(ifCustomSave){
+            f.setDialogTitle("Specify a file to save");
+
+            int userSelection = f.showSaveDialog(new JFrame());
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                savePortfolio(new File(f.getSelectedFile().getAbsolutePath()));
+            }
+
+        } else {
+            File dir = new File(f.getCurrentDirectory().toString().concat("\\Users"));
+            dir.mkdir();
+            java.lang.System.out.println(dir.getAbsolutePath());
+            File checkfile = new File(dir, user.getUsername() + "Port.txt");
+            savePortfolio(checkfile);
+        }
+    }
+    public void savePortfolio(File checkfile){
         try {
             PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
             writer.println("1");
@@ -142,6 +156,7 @@ public class Portfolio {
                 writer.println(a.getAccountWorth());
             }
             writer.close();
+            JOptionPane.showMessageDialog(null, "Portfolio Saved");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

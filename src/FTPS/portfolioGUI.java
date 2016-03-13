@@ -43,11 +43,18 @@ public class PortfolioGUI extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                port.savePortfolio();
-                JOptionPane.showMessageDialog(null, "Portfolio saved");
+                port.exportPortfolio(false);
             }
         });
         this.add(saveButton, BorderLayout.SOUTH);
+        JButton settings = new JButton("Settings");
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SettingGUI(port);
+            }
+        });
+        this.add(settings, BorderLayout.NORTH);
         this.setSize(300,400);
         setVisible(true);
     }

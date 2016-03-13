@@ -1,14 +1,29 @@
 package FTPS;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.*;
 
 /**
  * Created by CaptainGlac1er on 3/4/2016.
  */
 public class SettingGUI extends JFrame {
-        System system;
-        public SettingGUI(System system){
-            this.system = system;
+    Portfolio portfolio;
+        public SettingGUI(Portfolio portfolio){
+            this.portfolio = portfolio;
+            JPanel panel = new JPanel(new GridLayout(1,2));
+            JButton export = new JButton("Export Portfolio");
+            export.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    portfolio.exportPortfolio(true);
+                }
+            });
+            this.add(export);
+            this.setSize(300,400);
+            setVisible(true);
         }
 }
