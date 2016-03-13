@@ -9,7 +9,24 @@ import java.util.List;
  */
 public class SearchStock
 {
-    public SearchStock(){}
+    ArrayList<StockChild> stocks;
+    public SearchStock(ArrayList<StockChild> stocks){
+        this.stocks = stocks;
+    }
+    public ArrayList<StockChild> search(String ticker){
+        ArrayList<StockChild> output = new ArrayList<>();
+        for(StockChild s: stocks)
+            if(s.getStockAbbr().contains(ticker) || s.getStockName().contains(ticker))
+                output.add(s);
+        return output;
+
+    }
+    public StockChild getStock(String ticker){
+        for(StockChild s: stocks)
+            if(s.getStockAbbr().equals(ticker))
+                return s;
+        return null;
+    }
 
     public ArrayList<StockChild> search(ArrayList<StockChild> stocks, String abbr, String name,
                                         String index)

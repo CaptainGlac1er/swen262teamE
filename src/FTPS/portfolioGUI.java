@@ -32,6 +32,12 @@ public class PortfolioGUI extends JFrame {
         });
         tiles.add(cash);
         JButton stocks = new JButton("Stocks");
+        stocks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StockBack(null);
+            }
+        });
         tiles.add(stocks);
         JButton trans = new JButton("Transactions");
         tiles.add(trans);

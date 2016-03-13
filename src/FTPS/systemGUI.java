@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
  * Created by CaptainGlac1er on 2/28/2016.
  */
 public class SystemGUI extends JFrame implements ActionListener{
-    System system;
+    FTPS system;
     JTextField userText; //username used later
     JTextField passwordText; //password used later
 
-    public SystemGUI(System system){
+    public SystemGUI(FTPS system){
         this.system = system;
         JFrame frame = this;
         frame.setSize(300, 150);
