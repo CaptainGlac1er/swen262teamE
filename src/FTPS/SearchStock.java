@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SearchStock
 {
-    public SearchStock(){};
+    public SearchStock(){}
 
     public ArrayList<StockChild> search(ArrayList<StockChild> stocks, String abbr, String name,
                                         String index)
