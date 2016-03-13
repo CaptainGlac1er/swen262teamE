@@ -1,6 +1,7 @@
 package FTPS;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +36,9 @@ public class PortfolioGUI extends JFrame {
         stocks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new StockBack(null);
+                for(StockChild s : port.getAssets().GetStocks())
+                    System.out.println(s.getStockAbbr() + " " + s.getWorth());
+                new StockBack(port);
             }
         });
         tiles.add(stocks);

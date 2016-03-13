@@ -86,6 +86,7 @@ public class Portfolio {
             int topLevelEntries = Integer.parseInt(scanner.nextLine());
             for(int a = 0; a < topLevelEntries; a++){
                 int amount = Integer.parseInt(scanner.nextLine());
+                System.out.println(amount);
                 for(int b = 0; b < amount; b++) {
 
                     String input = scanner.nextLine();
@@ -101,7 +102,7 @@ public class Portfolio {
                             String ticker = scanner.nextLine();
                             int count = Integer.parseInt(scanner.nextLine());
 
-                            assets.AddStock(count,searchStock.getStock(ticker));
+                            assets.loadStock(count,searchStock.getStock(ticker));
                             break;
                     }
                 }

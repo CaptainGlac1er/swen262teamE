@@ -10,14 +10,14 @@ import java.util.List;
 public class Assets {
 
     //store different types of portfolio data
-    private List<Stock> stockList;
+    private ArrayList<StockChild> stockList;
     private List<CashAccount> cashAccountList;
     private List<Transactions> transactionsList;
     private int accountCount = 0;
 
     //constructor, initialize storage
     public Assets(){
-        stockList = new ArrayList<Stock>();
+        stockList = new ArrayList<StockChild>();
         cashAccountList = new ArrayList<CashAccount>();
         transactionsList = new ArrayList<Transactions>();
     }
@@ -44,9 +44,13 @@ public class Assets {
         //account
         cashAccountList.remove(inAccountIndex);
     }
-
+    public void loadStock(int quality, StockChild stockChild){
+        StockChild stock = stockChild;
+        stock.incCount(quality);
+        stockList.add(stock);
+    }
     //buy a stock,pay for it, store it and record itin each param of a stock and create a temp stock first thing
-    public void AddStock(int quantity, Stock stock){
+    public void AddStock(int quantity, StockChild stock){
     //currently takes in stock object, could take
         stock.incCount(quantity);
         double cost = stock.getTotWorth();
@@ -69,7 +73,7 @@ public class Assets {
                 //if already own stock, update, record transaction
                 if(stockList.contains(stock)){
                     int position =stockList.indexOf(stock);
-                    Stock tempStock = stockList.get(position);
+                    StockChild tempStock = stockList.get(position);
                     tempStock.incCount(quantity);
                     stockList.set(position,tempStock);
                     String count = Integer.toString(stock.getCount());
@@ -130,7 +134,7 @@ public class Assets {
         else return false;
     }
     //return all of the Assets
-    public List<Stock> GetStocks(){
+    public ArrayList<StockChild> GetStocks(){
         return  stockList;
     }
     public List<CashAccount> GetAccounts(){
