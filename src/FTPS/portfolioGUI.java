@@ -19,8 +19,9 @@ public class PortfolioGUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
+        JPanel topPanel = new JPanel(new GridLayout(1,2));
         JLabel testLabel = new JLabel(user.getUsername());
-        this.add(testLabel, BorderLayout.NORTH);
+        topPanel.add(testLabel);
 
         JPanel tiles = new JPanel(new GridLayout(2,2));
         JButton cash = new JButton("Cash");
@@ -43,6 +44,12 @@ public class PortfolioGUI extends JFrame {
         });
         tiles.add(stocks);
         JButton trans = new JButton("Transactions");
+        trans.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TransactionGUI(port);
+            }
+        });
         tiles.add(trans);
         JButton pred = new JButton("Predictions");
         tiles.add(pred);
@@ -63,7 +70,8 @@ public class PortfolioGUI extends JFrame {
                 new SettingGUI(port);
             }
         });
-        this.add(settings, BorderLayout.NORTH);
+        topPanel.add(settings);
+        this.add(topPanel, BorderLayout.NORTH);
         this.setSize(300,400);
         setVisible(true);
     }

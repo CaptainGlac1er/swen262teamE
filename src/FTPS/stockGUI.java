@@ -18,7 +18,7 @@ public class StockGUI extends JFrame {
         JLabel testLabel = new JLabel("Test User");
         this.add(testLabel, BorderLayout.NORTH);
 
-        this.setSize(650,200);
+        this.setSize(650,400);
         setVisible(true);
         infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
@@ -31,7 +31,7 @@ public class StockGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 StockChild stock = null;
                 addStockRow(stock);
-                    new SearchStockGUI(new SearchStock(FTPS.AllStocks),backend);
+                new SearchStockGUI(new SearchStock(FTPS.AllStocks),backend);
             }
         });
         frame.add(addStock, BorderLayout.SOUTH);

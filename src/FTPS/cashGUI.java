@@ -20,8 +20,8 @@ public class CashGUI extends JFrame {
     public CashGUI(List<CashAccount> cashAccounts){
         this.cashAccounts = cashAccounts;
         getAccountsList();
-        JLabel testLabel = new JLabel("Test User");
-        this.add(testLabel, BorderLayout.NORTH);
+        JLabel topLabel = new JLabel("Cash Accounts");
+        this.add(topLabel, BorderLayout.NORTH);
         this.add(cashList, BorderLayout.CENTER);
         JButton addAccount = new JButton("Add Account");
         addAccount.addActionListener(new ActionListener() {
@@ -32,10 +32,6 @@ public class CashGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "New Account Added");
                 cashList.setLayout(new GridLayout(cashAccounts.size(),2));
                 addAccountRow(cashList, newCashAccount);
-                cashList.repaint();
-                cashList.revalidate();
-                frame.repaint();
-                frame.revalidate();
                 getAccountsList();
             }
         });
@@ -48,15 +44,10 @@ public class CashGUI extends JFrame {
         cashList = new JPanel(new GridLayout(cashAccounts.size(),2));
         for(CashAccount account : cashAccounts){
             System.out.println(account.getAccountName() + " loaded");
-            addAccountRow(cashList, account);
+            addAccountRow(new JPanel(new GridLayout(0,5)), account);
         }
 
-        JOptionPane.showMessageDialog(null, cashList.getComponents().length +  " accounts loaded");
 
-        /*cashList.revalidate();
-        cashList.repaint();
-        frame.revalidate();
-        frame.repaint();*/
     }
     public void addAccountRow(JPanel panel, CashAccount account){
         JLabel name = new JLabel(account.getAccountName());
@@ -84,5 +75,7 @@ public class CashGUI extends JFrame {
         panel.add(change);
         panel.add(deposit);
         panel.add(withdraw);
+        frame.revalidate();
+        frame.repaint();
     }
 }

@@ -47,6 +47,7 @@ public class CashAccount{
     }
     //update gui
     public void update(){
+        accountWorth = ((int)(accountWorth * 100))/100.0;
         for(Component c: componentsToUpdate){
             ((JLabel)c).setText(accountWorth + "");
         }

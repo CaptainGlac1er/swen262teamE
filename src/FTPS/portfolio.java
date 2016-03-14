@@ -96,13 +96,19 @@ public class Portfolio {
                         case 'a':
                             String accountName = scanner.nextLine();
                             double balance = Double.parseDouble(scanner.nextLine());
-                            assets.AddCashAccount(balance, accountName);
+                            assets.loadCashAccount(balance, accountName);
                             break;
                         case 's':
                             String ticker = scanner.nextLine();
                             int count = Integer.parseInt(scanner.nextLine());
                             System.out.println(searchStock);
                             assets.loadStock(count,searchStock.getStock(ticker));
+                            break;
+                        case 't':
+                            String tranType = scanner.nextLine();
+                            String info = scanner.nextLine();
+                            String date = scanner.nextLine();
+                            assets.addTransaction(tranType,info, date);
                             break;
                     }
                 }
@@ -150,7 +156,7 @@ public class Portfolio {
     public void savePortfolio(File checkfile){
         try {
             PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-            writer.println("2");
+            writer.println("3");
             int accountCount = assets.GetAccounts().size();
             writer.println(accountCount);
             for(CashAccount a : assets.GetAccounts()) {
@@ -164,6 +170,14 @@ public class Portfolio {
                 writer.println("s");
                 writer.println(s.getStockAbbr());
                 writer.println(s.getCount());
+            }
+            int transactionCount = assets.GetTransactions().size();
+            writer.println(transactionCount);
+            for(Transactions transaction: assets.GetTransactions()){
+                writer.println("t");
+                writer.println(transaction.getType());
+                writer.println(transaction.getInfo());
+                writer.println(transaction.getTime());
             }
             writer.close();
             JOptionPane.showMessageDialog(null, "Portfolio Saved");

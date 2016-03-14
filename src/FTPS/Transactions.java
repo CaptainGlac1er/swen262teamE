@@ -9,28 +9,30 @@ public class Transactions {
     private String transInfo;
     private String transType;
     private String dateTime;
-    private int day;
-    private int month;
-    private int year;
-    private String time;
 
-    Transactions(String type, String info){
+    public Transactions(String type, String info){
         LocalDateTime timePoint = LocalDateTime.now();
-        month = timePoint.getMonthValue();
-        day = timePoint.getDayOfMonth();
-        year = timePoint.getYear();
+        int month = timePoint.getMonthValue();
+        int day = timePoint.getDayOfMonth();
+        int year = timePoint.getYear();
         LocalTime timeTemp = timePoint.toLocalTime();
-        time = timeTemp.toString();
+        String time = timeTemp.toString();
         dateTime = month + "/"+day+"/"+year+"  At:" + time;
         transInfo = info;
         transType = type;
     }
+    public Transactions(String type, String info, String dateTime){
+        transType = type;
+        transInfo = info;
+        this.dateTime = dateTime;
+    }
+    public String getType(){
+        return transType;
+    }
     public String getTime(){
-        String outTime = dateTime;
-        return outTime;
+        return dateTime;
     }
     public String getInfo(){
-        String outInfo = transInfo;
-        return outInfo;
+        return transInfo;
     }
 }
