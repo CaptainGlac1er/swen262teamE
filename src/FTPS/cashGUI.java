@@ -5,9 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.*;
-import java.lang.System;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -17,9 +14,15 @@ public class CashGUI extends JFrame {
     private List<CashAccount> cashAccounts;
     private JPanel cashList;
     private JFrame frame = this;
-    public CashGUI(List<CashAccount> cashAccounts){
+
+    /**
+     *
+     * @param cashAccounts
+     */
+    public CashGUI(List<CashAccount> cashAccounts) {
         this.cashAccounts = cashAccounts;
-        getAccountsList();
+        cashList = new JPanel();
+        generateAccountsList();
         JLabel topLabel = new JLabel("Cash Accounts");
         this.add(topLabel, BorderLayout.NORTH);
         this.add(cashList, BorderLayout.CENTER);
@@ -30,26 +33,39 @@ public class CashGUI extends JFrame {
                 CashAccount newCashAccount = new CashAccount(0, "New Account");
                 cashAccounts.add(newCashAccount);
                 JOptionPane.showMessageDialog(null, "New Account Added");
-                cashList.setLayout(new GridLayout(cashAccounts.size(),2));
                 addAccountRow(cashList, newCashAccount);
-                getAccountsList();
+                generateAccountsList();
             }
         });
         this.add(addAccount, BorderLayout.SOUTH);
-        this.setSize(600,300);
+        this.setSize(600, 300);
         setVisible(true);
 
     }
-    public void getAccountsList(){
-        cashList = new JPanel(new GridLayout(cashAccounts.size(),2));
-        for(CashAccount account : cashAccounts){
+
+    /**
+     * Generates the list of cash accounts on the Jframe
+     */
+    public void generateAccountsList() {
+        cashList.removeAll();
+        cashList.setLayout(new BoxLayout(cashList, BoxLayout.Y_AXIS));
+        for (CashAccount account : cashAccounts) {
             System.out.println(account.getAccountName() + " loaded");
-            addAccountRow(new JPanel(new GridLayout(0,5)), account);
+            cashList.add(addAccountRow(new JPanel(new GridLayout(0, 5)), account));
         }
+        frame.revalidate();
+        frame.repaint();
 
 
     }
-    public void addAccountRow(JPanel panel, CashAccount account){
+
+    /**
+     *
+     * @param panel
+     * @param account
+     * @return
+     */
+    public JPanel addAccountRow(JPanel panel, CashAccount account) {
         JLabel name = new JLabel(account.getAccountName());
         JLabel balance = new JLabel(account.getAccountWorth() + "");
         JTextField change = new JTextField("");
@@ -75,7 +91,6 @@ public class CashGUI extends JFrame {
         panel.add(change);
         panel.add(deposit);
         panel.add(withdraw);
-        frame.revalidate();
-        frame.repaint();
+        return panel;
     }
 }

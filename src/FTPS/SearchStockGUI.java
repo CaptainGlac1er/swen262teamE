@@ -15,7 +15,12 @@ public class SearchStockGUI extends JFrame {
     JPanel results;
     StockBack output;
 
-    public SearchStockGUI(SearchStock searchStock, StockBack output){
+    /**
+     *
+     * @param searchStock
+     * @param output
+     */
+    public SearchStockGUI(SearchStock searchStock, StockBack output) {
         this.output = output;
         this.searchStock = searchStock;
         addSearchBar();
@@ -26,8 +31,12 @@ public class SearchStockGUI extends JFrame {
         setSize(650, 300);
         setVisible(true);
     }
-    public void addSearchBar(){
-        JPanel panel = new JPanel(new GridLayout(1,2));
+
+    /**
+     *
+     */
+    public void addSearchBar() {
+        JPanel panel = new JPanel(new GridLayout(1, 2));
         JTextField searchBar = new JTextField();
         JButton searchButton = new JButton("Search");
 
@@ -39,18 +48,28 @@ public class SearchStockGUI extends JFrame {
         });
         panel.add(searchBar);
         panel.add(searchButton);
-        frame.add(panel,BorderLayout.NORTH);
+        frame.add(panel, BorderLayout.NORTH);
     }
-    public void displayResults(ArrayList<StockChild> stocks){
+
+    /**
+     *
+     * @param stocks
+     */
+    public void displayResults(ArrayList<StockChild> stocks) {
         results.removeAll();
-        for(StockChild stock: stocks){
+        for (StockChild stock : stocks) {
             System.out.println("Search Result: " + stock.getStockAbbr());
             displayRow(stock);
         }
         frame.revalidate();
         frame.repaint();
     }
-    public void displayRow(StockChild stock){
+
+    /**
+     *
+     * @param stock
+     */
+    public void displayRow(StockChild stock) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel(stock.getStockName());
         JButton select = new JButton("Select");
@@ -58,13 +77,13 @@ public class SearchStockGUI extends JFrame {
         select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuyStock newOrder = new BuyStock(output.portfolio.getAssets(),stock, 0);
+                BuyStock newOrder = new BuyStock(output.portfolio.getAssets(), stock, 0);
                 newOrder.execute();
                 frame.dispose();
                 output.addStocks();
             }
         });
-        panel.setPreferredSize(new Dimension(600,50));
+        panel.setPreferredSize(new Dimension(600, 50));
 
         panel.add(label);
         panel.add(select);

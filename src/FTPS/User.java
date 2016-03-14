@@ -1,8 +1,5 @@
 package FTPS;
 
-import javax.swing.*;
-import java.io.*;
-
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
@@ -11,20 +8,43 @@ public class User {
     private String password; //the hashed password
     private Portfolio port;
 
-    public User(String username){
+    /**
+     *
+     * @param username
+     */
+    public User(String username) {
         this.username = username;
     }
 
-    public Portfolio exportPortfolio(){
+    /**
+     *
+     * @return
+     */
+    public Portfolio exportPortfolio() {
         return null;
     }
+
+    /**
+     *
+     * @param portfolio
+     */
     public void importPortolio(Portfolio portfolio) {
 
     }
-    public String getUsername(){
+
+    /**
+     *
+     * @return
+     */
+    public String getUsername() {
         return username;
     }
-    public boolean openPortfolio(){
+
+    /**
+     *
+     * @return
+     */
+    public boolean openPortfolio() {
         new Portfolio(this);
         return true;
     }

@@ -7,12 +7,16 @@ import java.awt.event.ActionListener;
 /**
  * Created by CaptainGlac1er on 2/28/2016.
  */
-public class SystemGUI extends JFrame implements ActionListener{
+public class SystemGUI extends JFrame implements ActionListener {
     FTPS system;
     JTextField userText; //username used later
     JTextField passwordText; //password used later
 
-    public SystemGUI(FTPS system){
+    /**
+     *
+     * @param system
+     */
+    public SystemGUI(FTPS system) {
         this.system = system;
         JFrame frame = this;
         frame.setSize(300, 150);
@@ -25,6 +29,10 @@ public class SystemGUI extends JFrame implements ActionListener{
         frame.setVisible(true);
     }
 
+    /**
+     *
+     * @param panel
+     */
     public void placeComponents(JPanel panel) {
 
         panel.setLayout(null);
@@ -61,13 +69,12 @@ public class SystemGUI extends JFrame implements ActionListener{
     }
 
 
-
     public void actionPerformed(ActionEvent e) {
 
         JButton source = (JButton) e.getSource();
         String password = passwordText.getText();
         String user = userText.getText();
-        switch(source.getText()){
+        switch (source.getText()) {
             case "login":
                 system.LoginAction(user, password);
                 this.setVisible(false);

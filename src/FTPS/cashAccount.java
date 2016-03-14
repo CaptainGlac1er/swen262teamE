@@ -9,25 +9,25 @@ import java.util.ArrayList;
  */
 
 //user cash accounts
-public class CashAccount{
+public class CashAccount {
 
+    ArrayList<Component> componentsToUpdate = new ArrayList<>();
     //name and value
     private double accountWorth;
     private String accountName;
 
-    ArrayList<Component> componentsToUpdate = new ArrayList<>();
-
     //constructor for cashAccounts, name and value set
-    public CashAccount(double inWorth, String inName){
+    public CashAccount(double inWorth, String inName) {
         accountName = inName;
         accountWorth = inWorth;
     }
 
     //return the name of Acct
-    public String getAccountName(){
+    public String getAccountName() {
         String nameTemp = accountName;
         return nameTemp;
     }
+
     //return the value of the Acct
     public double getAccountWorth() {
         double worthTemp = accountWorth;
@@ -35,24 +35,31 @@ public class CashAccount{
     }
 
     //add money
-    public void addCash(double inAmount){
+    public void addCash(double inAmount) {
         accountWorth += inAmount;
         update();
 
     }
+
     //remove money
-    public void removeCash(double inAmount){
+    public void removeCash(double inAmount) {
         accountWorth -= inAmount;
         update();
     }
+
     //update gui
-    public void update(){
-        accountWorth = ((int)(accountWorth * 100))/100.0;
-        for(Component c: componentsToUpdate){
-            ((JLabel)c).setText(accountWorth + "");
+    public void update() {
+        accountWorth = ((int) (accountWorth * 100)) / 100.0;
+        for (Component c : componentsToUpdate) {
+            ((JLabel) c).setText(accountWorth + "");
         }
     }
-    public void addAccountBalanceViewer(Component component){
+
+    /**
+     * Adds the component to an array of objects to update when the account balance changes
+     * @param component component to update Balance
+     */
+    public void addAccountBalanceViewer(Component component) {
         componentsToUpdate.add(component);
     }
 }

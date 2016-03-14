@@ -1,12 +1,9 @@
 package FTPS;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -15,15 +12,30 @@ import java.util.List;
 public class PortfolioGUI extends JFrame {
     User user;
     Portfolio port;
-    public PortfolioGUI(User user, Portfolio port){
+
+    /**
+     *
+     * @param user
+     * @param port
+     */
+    public PortfolioGUI(User user, Portfolio port) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.port = port;
         this.user = user;
-        JPanel topPanel = new JPanel(new GridLayout(1,2));
+        makeUI();
+        this.setSize(300, 400);
+        setVisible(true);
+    }
+
+    /**
+     * Makes the UI for the PortfolioGUI
+     */
+    public void makeUI(){
+        JPanel topPanel = new JPanel(new GridLayout(1, 2));
         JLabel testLabel = new JLabel(user.getUsername());
         topPanel.add(testLabel);
 
-        JPanel tiles = new JPanel(new GridLayout(2,2));
+        JPanel tiles = new JPanel(new GridLayout(2, 2));
         JButton cash = new JButton("Cash");
         cash.addActionListener(new ActionListener() {
             @Override
@@ -37,7 +49,7 @@ public class PortfolioGUI extends JFrame {
         stocks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(StockChild s : port.getAssets().GetStocks())
+                for (StockChild s : port.getAssets().GetStocks())
                     System.out.println(s.getStockAbbr() + " " + s.getWorth());
                 new StockBack(port);
             }
@@ -72,8 +84,6 @@ public class PortfolioGUI extends JFrame {
         });
         topPanel.add(settings);
         this.add(topPanel, BorderLayout.NORTH);
-        this.setSize(300,400);
-        setVisible(true);
     }
 
 }
