@@ -1,5 +1,7 @@
 package FTPS;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class StockChild implements  Stock{
     private double stockWorth;
     private double projWorth;
     private List<StockChild> indexStocks;
+    private ArrayList<Component> observers = new ArrayList<>();
 
     public StockChild (String inName, String inAbbr, String inIndex, int inCount, double inWorth){
         stockCount = inCount;
@@ -77,4 +80,12 @@ public class StockChild implements  Stock{
         return stockIndex;
     }
 
+    public void addObserver(Component component){
+        observers.add(component);
+    }
+    public void updateObservers(){
+        for(Component c: observers){
+            ((JLabel)c).setText(getWorth() + "x" + getCount() + "=" + getTotWorth());
+        }
+    }
 }

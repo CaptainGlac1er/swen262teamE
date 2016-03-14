@@ -22,6 +22,7 @@ public class SearchStock
 
     }
     public StockChild getStock(String ticker){
+        System.out.println("\'" + ticker + "\'");
         for(StockChild s: stocks)
             if(s.getStockAbbr().equals(ticker))
                 return s;

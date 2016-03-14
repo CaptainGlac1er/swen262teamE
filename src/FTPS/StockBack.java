@@ -1,18 +1,22 @@
 package FTPS;
 
+import javax.sound.sampled.Port;
 import java.util.ArrayList;
 
 /**
  * Created by CaptainGlac1er on 3/13/2016.
  */
 public class StockBack {
-    StockGUI jframe;
+    public StockGUI jframe;
+    public Portfolio portfolio;
     public StockBack(Portfolio p){
-        jframe = new StockGUI();
-        addStocks(p);
+        portfolio = p;
+        jframe = new StockGUI(this);
+        addStocks();
     }
-    public void addStocks(Portfolio p){
-        for(StockChild s: p.getAssets().GetStocks())
+    public void addStocks(){
+        jframe.clear();
+        for(StockChild s: portfolio.getAssets().GetStocks())
             jframe.addStockRow(s);
     }
 }

@@ -84,7 +84,7 @@ public class Assets {
                 }
                 else{
                     //if new stock purchase, record transaction
-                   stockList.add(stock);
+                    stockList.add(stock);
                     String count = Integer.toString(stock.getCount());
                     String amt = Double.toString(stock.getWorth());
                     String info = ("Bought Stock "+ stock.getStockAbbr() +", Valued at: $"+ amt + ", Quantity #: " + count) ;
@@ -94,6 +94,7 @@ public class Assets {
                 trigger = true;
             }
         }
+        stock.updateObservers();
 
     }
 
@@ -125,6 +126,7 @@ public class Assets {
                 Transactions transaction = new Transactions("Stock", info);
                 transactionsList.add(transaction);
         }
+        stock.updateObservers();
     }
     //helper function to reduce clutter
     public boolean CheckValues(double valAcct, double valCost){

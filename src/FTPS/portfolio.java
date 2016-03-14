@@ -101,7 +101,7 @@ public class Portfolio {
                         case 's':
                             String ticker = scanner.nextLine();
                             int count = Integer.parseInt(scanner.nextLine());
-
+                            System.out.println(searchStock);
                             assets.loadStock(count,searchStock.getStock(ticker));
                             break;
                     }
@@ -150,13 +150,20 @@ public class Portfolio {
     public void savePortfolio(File checkfile){
         try {
             PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-            writer.println("1");
+            writer.println("2");
             int accountCount = assets.GetAccounts().size();
             writer.println(accountCount);
             for(CashAccount a : assets.GetAccounts()) {
                 writer.println("a");
                 writer.println(a.getAccountName());
                 writer.println(a.getAccountWorth());
+            }
+            int stockCount = assets.GetStocks().size();
+            writer.println(stockCount);
+            for(StockChild s : assets.GetStocks()){
+                writer.println("s");
+                writer.println(s.getStockAbbr());
+                writer.println(s.getCount());
             }
             writer.close();
             JOptionPane.showMessageDialog(null, "Portfolio Saved");
