@@ -57,6 +57,7 @@ public class CashAccount {
 
     /**
      * Adds the component to an array of objects to update when the account balance changes
+     *
      * @param component component to update Balance
      */
     public void addAccountBalanceViewer(Component component) {

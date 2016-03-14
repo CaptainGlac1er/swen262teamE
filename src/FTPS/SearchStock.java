@@ -1,7 +1,6 @@
 package FTPS;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Josh on 3/10/2016.
@@ -11,6 +10,7 @@ public class SearchStock {
 
     /**
      * Create SearchStock object used to be able to search the stock database
+     *
      * @param stocks array of the stocks in the stock database
      */
     public SearchStock(ArrayList<StockChild> stocks) {
@@ -19,6 +19,7 @@ public class SearchStock {
 
     /**
      * Allows the user to search for stocks based on a partial name
+     *
      * @param ticker ticker abbreviation of the stock or the name
      * @return an array of Stocks that have the search term
      */
@@ -33,6 +34,7 @@ public class SearchStock {
 
     /**
      * Get the Stock for that particular ticker abbreviation.
+     *
      * @param ticker ticker abbreviation
      * @return the stock
      */

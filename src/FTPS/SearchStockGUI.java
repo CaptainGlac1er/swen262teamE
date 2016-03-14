@@ -16,7 +16,6 @@ public class SearchStockGUI extends JFrame {
     StockBack output;
 
     /**
-     *
      * @param searchStock
      * @param output
      */
@@ -52,7 +51,6 @@ public class SearchStockGUI extends JFrame {
     }
 
     /**
-     *
      * @param stocks
      */
     public void displayResults(ArrayList<StockChild> stocks) {
@@ -66,7 +64,6 @@ public class SearchStockGUI extends JFrame {
     }
 
     /**
-     *
      * @param stock
      */
     public void displayRow(StockChild stock) {

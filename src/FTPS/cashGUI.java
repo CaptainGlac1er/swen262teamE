@@ -16,8 +16,8 @@ public class CashGUI extends JFrame {
     private JFrame frame = this;
 
     /**
-     *
-     * @param cashAccounts
+     * Makes a GUI to change cash account balances
+     * @param cashAccounts list of cash accounts
      */
     public CashGUI(List<CashAccount> cashAccounts) {
         this.cashAccounts = cashAccounts;
@@ -33,7 +33,7 @@ public class CashGUI extends JFrame {
                 CashAccount newCashAccount = new CashAccount(0, "New Account");
                 cashAccounts.add(newCashAccount);
                 JOptionPane.showMessageDialog(null, "New Account Added");
-                addAccountRow(cashList, newCashAccount);
+                cashList.add(addAccountRow(newCashAccount));
                 generateAccountsList();
             }
         });
@@ -46,12 +46,11 @@ public class CashGUI extends JFrame {
     /**
      * Generates the list of cash accounts on the Jframe
      */
-    public void generateAccountsList() {
+    private void generateAccountsList() {
         cashList.removeAll();
         cashList.setLayout(new BoxLayout(cashList, BoxLayout.Y_AXIS));
         for (CashAccount account : cashAccounts) {
-            System.out.println(account.getAccountName() + " loaded");
-            cashList.add(addAccountRow(new JPanel(new GridLayout(0, 5)), account));
+            cashList.add(addAccountRow(account));
         }
         frame.revalidate();
         frame.repaint();
@@ -60,12 +59,12 @@ public class CashGUI extends JFrame {
     }
 
     /**
-     *
-     * @param panel
-     * @param account
-     * @return
+     * Makes a row for each acount
+     * @param account account to get the info from
+     * @return the jpanel that contains the row
      */
-    public JPanel addAccountRow(JPanel panel, CashAccount account) {
+    private JPanel addAccountRow(CashAccount account) {
+        JPanel panel = new JPanel(new GridLayout(0, 5));
         JLabel name = new JLabel(account.getAccountName());
         JLabel balance = new JLabel(account.getAccountWorth() + "");
         JTextField change = new JTextField("");
@@ -75,15 +74,23 @@ public class CashGUI extends JFrame {
         deposit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Double amount = Double.parseDouble(change.getText());
-                account.addCash(amount);
+                try {
+                    Double amount = Double.parseDouble(change.getText());
+                    account.addCash(amount);
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Non number char in the field");
+                }
             }
         });
         withdraw.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Double amount = Double.parseDouble(change.getText());
-                account.removeCash(amount);
+                try {
+                    Double amount = Double.parseDouble(change.getText());
+                    account.removeCash(amount);
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Non number char in the field");
+                }
             }
         });
         panel.add(name);

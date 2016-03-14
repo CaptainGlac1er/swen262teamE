@@ -13,7 +13,6 @@ public class Transactions {
     private String dateTime;
 
     /**
-     *
      * @param type
      * @param info
      */
@@ -30,7 +29,6 @@ public class Transactions {
     }
 
     /**
-     *
      * @param type
      * @param info
      * @param dateTime
@@ -42,7 +40,6 @@ public class Transactions {
     }
 
     /**
-     *
      * @return
      */
     public String getType() {
@@ -50,7 +47,6 @@ public class Transactions {
     }
 
     /**
-     *
      * @return
      */
     public String getTime() {
@@ -58,7 +54,6 @@ public class Transactions {
     }
 
     /**
-     *
      * @return
      */
     public String getInfo() {

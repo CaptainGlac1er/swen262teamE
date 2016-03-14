@@ -8,8 +8,8 @@ public class StockBack {
     public Portfolio portfolio;
 
     /**
-     *
-     * @param p
+     * Create backend for stockGUI
+     * @param p portfolio to use to get data from
      */
     public StockBack(Portfolio p) {
         portfolio = p;
@@ -18,7 +18,7 @@ public class StockBack {
     }
 
     /**
-     *
+     * adds the stocks rows to the jframe
      */
     public void addStocks() {
         jframe.clear();

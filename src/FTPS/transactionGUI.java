@@ -14,7 +14,6 @@ public class TransactionGUI extends JFrame {
     JPanel info;
 
     /**
-     *
      * @param p
      */
     public TransactionGUI(Portfolio p) {
@@ -40,7 +39,6 @@ public class TransactionGUI extends JFrame {
     }
 
     /**
-     *
      * @param transactions
      */
     public void displayData(ArrayList<Transactions> transactions) {
@@ -50,7 +48,6 @@ public class TransactionGUI extends JFrame {
     }
 
     /**
-     *
      * @param transaction
      */
     public void displayRow(Transactions transaction) {

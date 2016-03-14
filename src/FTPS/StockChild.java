@@ -66,11 +66,11 @@ public class StockChild implements Stock {
     }
 
     public double getProjWorth() {
-        return ((int)(projWorth * 100))/100.0;
+        return ((int) (projWorth * 100)) / 100.0;
     }
 
     public void setProjWorth(double inWorth) {
-        projWorth = ((int)(inWorth * 100))/100.0;
+        projWorth = ((int) (inWorth * 100)) / 100.0;
     }
 
     //Increment the count of stocks owned

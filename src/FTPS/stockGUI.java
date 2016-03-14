@@ -14,8 +14,8 @@ public class StockGUI extends JFrame {
     StockBack backend;
 
     /**
-     *
-     * @param back
+     * creates the GUI object and makes the GUI
+     * @param back backend that supports the GUI
      */
     public StockGUI(StockBack back) {
         backend = back;
@@ -42,7 +42,7 @@ public class StockGUI extends JFrame {
     }
 
     /**
-     *
+     * clears the board
      */
     public void clear() {
         infoPanel.removeAll();
@@ -51,8 +51,8 @@ public class StockGUI extends JFrame {
     }
 
     /**
-     *
-     * @param stock
+     * Adds a row to the GUI
+     * @param stock stock to get data from and affect
      */
     public void addStockRow(StockChild stock) {
         JPanel row = new JPanel(new GridLayout(1, 5));

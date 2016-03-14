@@ -13,6 +13,7 @@ public class FTPS {
     private static HashMap<String, Integer> userStorage; //storage for userdata
     JTextField userText; //username used later
     JTextField passwordText; //password used later
+
     /**
      * intiliazes user hashmap (calls LoadUsers) and the GUI
      */
@@ -66,7 +67,6 @@ public class FTPS {
     }
 
     /**
-     *
      * @return
      */
     public static ArrayList<StockChild> getAllStocks() {
@@ -150,7 +150,6 @@ public class FTPS {
     }
 
     /**
-     *
      * @param password
      * @return
      */
@@ -165,7 +164,6 @@ public class FTPS {
     }
 
     /**
-     *
      * @param username
      * @param password
      * @return

@@ -9,7 +9,6 @@ public class User {
     private Portfolio port;
 
     /**
-     *
      * @param username
      */
     public User(String username) {
@@ -17,7 +16,6 @@ public class User {
     }
 
     /**
-     *
      * @return
      */
     public Portfolio exportPortfolio() {
@@ -25,7 +23,6 @@ public class User {
     }
 
     /**
-     *
      * @param portfolio
      */
     public void importPortolio(Portfolio portfolio) {
@@ -33,7 +30,6 @@ public class User {
     }
 
     /**
-     *
      * @return
      */
     public String getUsername() {
@@ -41,7 +37,6 @@ public class User {
     }
 
     /**
-     *
      * @return
      */
     public boolean openPortfolio() {

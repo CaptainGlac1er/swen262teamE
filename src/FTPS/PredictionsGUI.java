@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +14,8 @@ public class PredictionsGUI extends JFrame {
     PortEngine portEngine;
     JPanel info;
     Portfolio portfolio;
-    public PredictionsGUI(PortEngine portEngine, Portfolio port){
+
+    public PredictionsGUI(PortEngine portEngine, Portfolio port) {
         portfolio = port;
         JLabel label = new JLabel("Predictions");
         frame.add(label, BorderLayout.NORTH);
@@ -24,9 +24,10 @@ public class PredictionsGUI extends JFrame {
         frame.setSize(300, 400);
         frame.setVisible(true);
     }
-    private void makeGUI(){
+
+    private void makeGUI() {
         info = new JPanel();
-        info.setLayout(new GridLayout(6,2));
+        info.setLayout(new GridLayout(6, 2));
         JLabel dayLabel = new JLabel("Days");
         JTextField day = new JTextField("0");
         JLabel monthLabel = new JLabel("Months");
@@ -39,18 +40,24 @@ public class PredictionsGUI extends JFrame {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double rateAmount = Double.parseDouble(rate.getText())/100;
-                ArrayList<StockChild> output = portEngine.simBullBearNone(portfolio.getAssets().GetStocks(), portEngine.calcYears(Integer.parseInt(day.getText()), Integer.parseInt(month.getText()), Integer.parseInt(year.getText())), rateAmount);
-                double out = 0;
-                for (StockChild s : output){
-                    out += s.getProjWorth();
-
+                double rateAmount = Double.parseDouble(rate.getText()) / 100;
+                ArrayList<StockChild> output;
+                try {
+                    output = portEngine.simBullBearNone(portfolio.getAssets().GetStocks(), portEngine.calcYears(Integer.parseInt(day.getText()), Integer.parseInt(month.getText()), Integer.parseInt(year.getText())), rateAmount);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Could not parse a field. Please check input");
+                    return;
                 }
-                out = ((int)(out*100))/100.0;
+                double out = 0;
+
+                for (StockChild s : output) {
+                    out += s.getProjWorth();
+                }
+                out = ((int) (out * 100)) / 100.0;
                 String addToOutput = "";
-                if(rateAmount > 0)
+                if (rateAmount > 0)
                     addToOutput = "bull market";
-                else if(rateAmount < 0)
+                else if (rateAmount < 0)
                     addToOutput = "bear market";
                 else
                     addToOutput = "stale market";

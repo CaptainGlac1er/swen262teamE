@@ -27,18 +27,6 @@ public class Portfolio {
         return assets;
     }
 
-    public void createAsset() {
-
-    }
-
-    public void getPortfolio() {
-
-    }
-
-    public void getUser(String username) {
-
-    }
-
     //handle buying stock, call invoker
     public void buyStock(StockChild inStock, int inQuantity) {
         BuyStock bStock = new BuyStock(assets, inStock, inQuantity);
@@ -126,27 +114,13 @@ public class Portfolio {
                 }
 
             }
-            /*while((currentLine = br.readLine()) != null){
-                switch (currentLine){
-                    case "a":
-                        for()
-                        break;
-                    case "s":
-                        break;
-                }
-            }*/
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InputMismatchException e) {
             e.printStackTrace();
         }
         return true;
     }
 
     /**
-     *
      * @param ifCustomSave
      */
     public void exportPortfolio(boolean ifCustomSave) {
@@ -170,8 +144,8 @@ public class Portfolio {
     }
 
     /**
-     *
-     * @param checkfile
+     * save the portfolio to a file
+     * @param checkfile file to save too
      */
     public void savePortfolio(File checkfile) {
         try {

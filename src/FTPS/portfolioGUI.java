@@ -14,7 +14,6 @@ public class PortfolioGUI extends JFrame {
     Portfolio port;
 
     /**
-     *
      * @param user
      * @param port
      */
@@ -30,7 +29,7 @@ public class PortfolioGUI extends JFrame {
     /**
      * Makes the UI for the PortfolioGUI
      */
-    public void makeUI(){
+    public void makeUI() {
         JPanel topPanel = new JPanel(new GridLayout(1, 2));
         JLabel testLabel = new JLabel(user.getUsername());
         topPanel.add(testLabel);

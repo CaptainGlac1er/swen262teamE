@@ -13,7 +13,6 @@ public class SystemGUI extends JFrame implements ActionListener {
     JTextField passwordText; //password used later
 
     /**
-     *
      * @param system
      */
     public SystemGUI(FTPS system) {
@@ -30,7 +29,6 @@ public class SystemGUI extends JFrame implements ActionListener {
     }
 
     /**
-     *
      * @param panel
      */
     public void placeComponents(JPanel panel) {
@@ -76,13 +74,13 @@ public class SystemGUI extends JFrame implements ActionListener {
         String user = userText.getText();
         switch (source.getText()) {
             case "login":
-                if(system.LoginAction(user, password)) {
+                if (system.LoginAction(user, password)) {
                     this.setVisible(false);
                     this.dispose();
                 }
                 break;
             case "register":
-                if(system.RegisterAction(user, password)) {
+                if (system.RegisterAction(user, password)) {
                     this.setVisible(false);
                     this.dispose();
                 }

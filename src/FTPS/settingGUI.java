@@ -12,7 +12,6 @@ public class SettingGUI extends JFrame {
     Portfolio portfolio;
 
     /**
-     *
      * @param portfolio
      */
     public SettingGUI(Portfolio portfolio) {
