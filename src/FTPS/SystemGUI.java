@@ -68,23 +68,32 @@ public class SystemGUI extends JFrame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() instanceof JButton) {
+            JButton source = (JButton) e.getSource();
+            String password = passwordText.getText();
+            String user = userText.getText();
+            switch (source.getText()) {
+                case "login":
+                    if (system.LoginAction(user, password)) {
+                        this.setVisible(false);
+                        this.dispose();
+                    }
+                    break;
+                case "register":
+                    if (system.RegisterAction(user, password)) {
+                        this.setVisible(false);
+                        this.dispose();
+                    }
+                    break;
+            }
+        }else if(e.getSource() instanceof JPasswordField){
+            String password = passwordText.getText();
+            String user = userText.getText();
+            if (system.LoginAction(user, password)) {
+                this.setVisible(false);
+                this.dispose();
+            }
 
-        JButton source = (JButton) e.getSource();
-        String password = passwordText.getText();
-        String user = userText.getText();
-        switch (source.getText()) {
-            case "login":
-                if (system.LoginAction(user, password)) {
-                    this.setVisible(false);
-                    this.dispose();
-                }
-                break;
-            case "register":
-                if (system.RegisterAction(user, password)) {
-                    this.setVisible(false);
-                    this.dispose();
-                }
-                break;
         }
     }
 

@@ -70,7 +70,8 @@ public class FTPS {
      * @return
      */
     public static ArrayList<StockChild> getAllStocks() {
-        String filepath = java.lang.System.getProperty("user.dir") + "\\src\\equities.csv";
+        //String filepath = java.lang.System.getProperty("user.dir") + "\\src\\equities.csv";
+        String filepath = (new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() + "\\equities.csv";
         try {
             String currentLine;
             BufferedReader br = new BufferedReader(new FileReader(filepath));
@@ -106,7 +107,7 @@ public class FTPS {
 
         if (PasswordCheck(username, password)) {
             JFileChooser f = new JFileChooser();
-            java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
+            //java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
             User user = new User(username);
             user.openPortfolio();
             return true;
