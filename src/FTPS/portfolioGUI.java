@@ -64,6 +64,12 @@ public class PortfolioGUI extends JFrame {
         });
         tiles.add(trans);
         JButton pred = new JButton("Predictions");
+        pred.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PredictionsGUI(new PortEngine(), port);
+            }
+        });
         tiles.add(pred);
         this.add(tiles, BorderLayout.CENTER);
 

@@ -76,12 +76,16 @@ public class SystemGUI extends JFrame implements ActionListener {
         String user = userText.getText();
         switch (source.getText()) {
             case "login":
-                system.LoginAction(user, password);
-                this.setVisible(false);
-                this.dispose();
+                if(system.LoginAction(user, password)) {
+                    this.setVisible(false);
+                    this.dispose();
+                }
                 break;
             case "register":
-                system.RegisterAction(user, password);
+                if(system.RegisterAction(user, password)) {
+                    this.setVisible(false);
+                    this.dispose();
+                }
                 break;
         }
     }

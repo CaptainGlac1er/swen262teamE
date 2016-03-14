@@ -11,26 +11,20 @@ public class PortEngine {
     private double principal;
     private double years;
     private double worth;
-    private double bullRate = .05;
-    private double bearRate = -.05;
+    private double Rate = .05;
     //store output
     private ArrayList<StockChild> projectedStocks;
 
     //calc value change for each stock
-    public ArrayList<StockChild> simBullBearNone(ArrayList<StockChild> list, double numYears, int decider) {
+    public ArrayList<StockChild> simBullBearNone(ArrayList<StockChild> list, double years, double percent) {
+        projectedStocks = new ArrayList<>();
+        Rate = percent;
         for (StockChild stock : list) {
-            years = numYears;
+            years = years;
             principal = stock.getTotWorth();
             //calculate value or return if none projection
             for (int i = 0; i <= years; i++) {
-                if (decider == 0) {
-                    worth = principal * Math.pow(1 + bullRate, i);
-                }
-                if (decider == 1) {
-                    worth = principal * Math.pow(1 + bearRate, i);
-                } else {
-                    return list;
-                }
+                worth = principal * Math.pow(1 + Rate, i);
 
             }
             //add projected worth
@@ -42,11 +36,11 @@ public class PortEngine {
     }
 
     //calculate number of years to sim
-    public double calcYears(double inDays, double inMonths, double inYears) {
+    public double calcYears(int inDays, int inMonths, int inYears) {
         double days = inDays;
         days += (inMonths * 30);
         days += (inYears * 365);
-        years = (days / 365);
+        double years = (days / 365);
         return years;
 
     }

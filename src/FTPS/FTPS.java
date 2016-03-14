@@ -102,18 +102,20 @@ public class FTPS {
      * @param username
      * @param password
      */
-    public void LoginAction(String username, String password) {
+    public boolean LoginAction(String username, String password) {
 
         if (PasswordCheck(username, password)) {
             JFileChooser f = new JFileChooser();
             java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
             User user = new User(username);
             user.openPortfolio();
+            return true;
             //load user portfolio
             //new portfolio();
         } else {
-            java.lang.System.out.println("error logging in" + username);
             //incorrect password or username alert
+            JOptionPane.showMessageDialog(null, "Error Logging in " + username);
+            return false;
         }
 
 
@@ -125,21 +127,9 @@ public class FTPS {
      * @param username
      * @param password
      */
-    public void RegisterAction(String username, String password) {
+    public boolean RegisterAction(String username, String password) {
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-        //if (!checkfile.exists()) {
-        //    try {
-        //        PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-        //        writer.println("Username,Password");
-        //        writer.close();
-//
-        //    } catch (FileNotFoundException e) {
-        //        e.printStackTrace();
-        //    } catch (IOException e) {
-        //        e.printStackTrace();
-        //    }
-        //}
 
         if (userStorage.isEmpty() || !userStorage.containsKey(username)) {
             userStorage.put(username, Hasher(password));
@@ -148,11 +138,13 @@ public class FTPS {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            LoginAction(username, password);
+            return true;
 
         } else {
             //User already exists alert GUI
-            java.lang.System.out.print(("user already exists"));
+            JOptionPane.showMessageDialog(null, "User already in system");
+            return false;
         }
 
     }
@@ -180,7 +172,7 @@ public class FTPS {
      */
     public Boolean PasswordCheck(String username, String password) {
         if (!userStorage.isEmpty()) {
-            if (Hasher(password) == (userStorage.get(username))) {
+            if (userStorage.get(username) != null && Hasher(password) == (userStorage.get(username))) {
                 return true;
             }
         }

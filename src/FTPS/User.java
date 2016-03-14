@@ -45,7 +45,7 @@ public class User {
      * @return
      */
     public boolean openPortfolio() {
-        new Portfolio(this);
+        port = new Portfolio(this);
         return true;
     }
 
