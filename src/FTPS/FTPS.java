@@ -18,11 +18,14 @@ public class FTPS {
      * intiliazes user hashmap (calls LoadUsers) and the GUI
      */
     public FTPS() {
+
+        StockUpdateThread stockThread = new StockUpdateThread(AllStocks, "-Stock Update Thread-");
         //System fsystem = new System();
         new SystemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
         getAllStocks();
+        stockThread.start();
 
     }
 

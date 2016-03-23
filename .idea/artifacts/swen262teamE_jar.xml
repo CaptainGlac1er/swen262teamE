@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="swen262teamE:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/swen262teamE_jar</output-path>
-    <root id="archive" name="swen262teamE.jar">
-      <element id="module-output" name="swen262teamE" />
-    </root>
-  </artifact>
-</component>
