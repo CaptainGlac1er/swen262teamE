@@ -18,7 +18,6 @@ public class FTPS {
      * intiliazes user hashmap (calls LoadUsers) and the GUI
      */
     public FTPS() {
-
         StockUpdateThread stockThread = new StockUpdateThread(AllStocks, "-Stock Update Thread-");
         //System fsystem = new System();
         new SystemGUI(this);
@@ -26,7 +25,6 @@ public class FTPS {
         LoadUsers();
         getAllStocks();
         stockThread.start();
-
     }
 
     public static void main(String[] args) {
@@ -34,7 +32,7 @@ public class FTPS {
     }
 
     /**
-     * Loads text file and puts them inro user info hashmap
+     * Loads text file and puts them into user info hashmap
      */
     public static void LoadUsers() {
         JFileChooser f = new JFileChooser();
@@ -80,9 +78,9 @@ public class FTPS {
             BufferedReader br = new BufferedReader(new FileReader(filepath));
 
             while ((currentLine = br.readLine()) != null) {
-                java.lang.System.out.println(currentLine);
+//                java.lang.System.out.println(currentLine);
                 String[] info = currentLine.split("\"");
-                java.lang.System.out.println(info[5]);
+//                java.lang.System.out.println(info[5]);
                 StockChild currentStock = new StockChild(info[3], info[1], info[7], 0, Double.parseDouble(info[5]));
                 AllStocks.add(currentStock);
             }

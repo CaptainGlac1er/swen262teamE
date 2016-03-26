@@ -55,6 +55,11 @@ public class StockChild implements Stock {
         return stockWorth;
     }
 
+    //return worth of one stock
+    public void setWorth(double inWorth) {
+        stockWorth = inWorth;
+    }
+
     //return stock name
     public String getStockName() {
         return stockName;
