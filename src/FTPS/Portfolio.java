@@ -82,7 +82,7 @@ public class Portfolio {
             String currentLine;
             //BufferedReader br = new BufferedReader(new FileReader(checkfile));
             Scanner scanner = new Scanner(checkfile);
-            SearchStock searchStock = new SearchStock(FTPS.AllStocks);
+            SearchStock searchStock = new SearchStock();
             int topLevelEntries = Integer.parseInt(scanner.nextLine());
             for (int a = 0; a < topLevelEntries; a++) {
                 int amount = Integer.parseInt(scanner.nextLine());

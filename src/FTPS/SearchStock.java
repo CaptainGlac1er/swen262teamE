@@ -13,8 +13,8 @@ public class SearchStock {
      *
      * @param stocks array of the stocks in the stock database
      */
-    public SearchStock(ArrayList<StockChild> stocks) {
-        this.stocks = stocks;
+    public SearchStock() {
+
     }
 
     /**
@@ -24,12 +24,21 @@ public class SearchStock {
      * @return an array of Stocks that have the search term
      */
     public ArrayList<StockChild> search(String ticker) {
+
+        //instantiate new output list
         ArrayList<StockChild> output = new ArrayList<>();
+
+        //update stocklist for search
+        stocks = StockDB.getInstance().getStocks();
+
+        //for each child in stock list
         for (StockChild s : stocks)
+
+            //if char string is part of ticker or name
             if (s.getStockAbbr().contains(ticker) || s.getStockName().contains(ticker))
+                //add current stock to output list
                 output.add(s);
         return output;
-
     }
 
     /**
@@ -40,6 +49,10 @@ public class SearchStock {
      */
     public StockChild getStock(String ticker) {
         System.out.println("\'" + ticker + "\'");
+
+        //update stocklist for search
+        stocks = StockDB.getInstance().getStocks();
+
         for (StockChild s : stocks)
             if (s.getStockAbbr().equals(ticker))
                 return s;

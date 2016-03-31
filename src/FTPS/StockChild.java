@@ -20,13 +20,12 @@ public class StockChild implements Stock {
     private List<StockChild> indexStocks;
     private ArrayList<Component> observers = new ArrayList<>();
 
-    public StockChild(String inName, String inAbbr, String inIndex, int inCount, double inWorth) {
+    public StockChild(String inName, String inAbbr, String inIndex, int inCount) {
         stockCount = inCount;
         stockName = inName;
         stockAbbr = inAbbr;
-        stockWorth = inWorth;
         stockIndex = inIndex;
-        indexStocks = new ArrayList<StockChild>();
+        indexStocks = new ArrayList<>();
         projWorth = 0;
     }
 

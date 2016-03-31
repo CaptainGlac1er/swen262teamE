@@ -25,4 +25,6 @@ public class StockBack {
         for (StockChild s : portfolio.getAssets().GetStocks())
             jframe.addStockRow(s);
     }
+
+
 }

@@ -9,7 +9,6 @@ import java.util.HashMap;
  * Created by CaptainGlac1er on 3/4/2016.
  */
 public class FTPS {
-    public static ArrayList<StockChild> AllStocks = new ArrayList<>();
     private static HashMap<String, Integer> userStorage; //storage for userdata
     JTextField userText; //username used later
     JTextField passwordText; //password used later
@@ -18,13 +17,10 @@ public class FTPS {
      * intiliazes user hashmap (calls LoadUsers) and the GUI
      */
     public FTPS() {
-        StockUpdateThread stockThread = new StockUpdateThread(AllStocks, "-Stock Update Thread-");
         //System fsystem = new System();
         new SystemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
-        getAllStocks();
-        stockThread.start();
     }
 
     public static void main(String[] args) {
@@ -65,36 +61,6 @@ public class FTPS {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * @return
-     */
-    public static ArrayList<StockChild> getAllStocks() {
-        //String filepath = java.lang.System.getProperty("user.dir") + "\\src\\equities.csv";
-        String filepath = (new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() + "\\equities.csv";
-        try {
-            String currentLine;
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
-
-            while ((currentLine = br.readLine()) != null) {
-//                java.lang.System.out.println(currentLine);
-                String[] info = currentLine.split("\"");
-//                java.lang.System.out.println(info[5]);
-                StockChild currentStock = new StockChild(info[3], info[1], info[7], 0, Double.parseDouble(info[5]));
-                AllStocks.add(currentStock);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return AllStocks;
     }
 
     /**

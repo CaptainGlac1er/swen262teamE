@@ -35,7 +35,7 @@ public class StockGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 StockChild stock = null;
                 addStockRow(stock);
-                new SearchStockGUI(new SearchStock(FTPS.AllStocks), backend);
+                new SearchStockGUI(new SearchStock(), backend);
             }
         });
         frame.add(addStock, BorderLayout.SOUTH);
