@@ -105,8 +105,6 @@ public class StockDB implements Runnable
             }
 
             URL yahoo = new URL("http://finance.yahoo.com/d/quotes.csv?s="+ abbrList + "&f=l1");
-            // Create a URL and open a connection
-//            URL YahooURL = new URL(url);
             HttpURLConnection con = (HttpURLConnection) yahoo.openConnection();
 
             // Set the HTTP Request type method to GET (Default: GET)

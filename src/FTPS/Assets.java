@@ -17,9 +17,9 @@ public class Assets {
 
     //constructor, initialize storage
     public Assets() {
-        stockList = new ArrayList<StockChild>();
-        cashAccountList = new ArrayList<CashAccount>();
-        transactionsList = new ArrayList<Transactions>();
+        stockList = new ArrayList<>();
+        cashAccountList = new ArrayList<>();
+        transactionsList = new ArrayList<>();
     }
 
     //create a cash account store it and record it
@@ -55,9 +55,8 @@ public class Assets {
     }
 
     public void loadStock(int quality, StockChild stockChild) {
-        StockChild stock = stockChild;
-        stock.incCount(quality);
-        stockList.add(stock);
+        stockChild.incCount(quality);
+        stockList.add(stockChild);
     }
 
     //buy a stock,pay for it, store it and record itin each param of a stock and create a temp stock first thing

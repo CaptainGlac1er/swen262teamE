@@ -2,7 +2,6 @@ package FTPS;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -34,19 +33,14 @@ public class FTPS {
     public static void LoadUsers() {
         JFileChooser f = new JFileChooser();
         File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-        if (!checkfile.exists()) {
-            try {
+        try {
+
+            if (!checkfile.exists()) {
                 PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
                 writer.println("Username,Password");
                 writer.close();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
-        try {
+
             String currentLine;
             BufferedReader br = new BufferedReader(new FileReader(checkfile));
 
@@ -57,10 +51,9 @@ public class FTPS {
                 String[] info = currentLine.split(",");
                 userStorage.put(info[0], Integer.parseInt(info[1]));
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (FileNotFoundException || IOException e){
+            System.out.println("Load User error:\n" + e.printStackTrace());
         }
     }
 
@@ -74,7 +67,6 @@ public class FTPS {
     public boolean LoginAction(String username, String password) {
 
         if (PasswordCheck(username, password)) {
-            JFileChooser f = new JFileChooser();
             //java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
             User user = new User(username);
             user.openPortfolio();
