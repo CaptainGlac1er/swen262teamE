@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * Created by CaptainGlac1er on 2/28/2016.
@@ -15,7 +16,8 @@ public class Portfolio {
     User user;
     Assets assets = new Assets();
     PortEngine portEngine;
-
+    Stack undoStack = new Stack();
+    Stack redoStack = new Stack();
     public Portfolio(User user) {
         this.portEngine = new PortEngine();
         this.user = user;
@@ -30,32 +32,91 @@ public class Portfolio {
     //handle buying stock, call invoker
     public void buyStock(StockChild inStock, int inQuantity) {
         BuyStock bStock = new BuyStock(assets, inStock, inQuantity);
+        undoStack.push(bStock);
+        redoStack.clear();
         placeOrder(bStock);
     }
 
     //handle selling stock, call invoker
     public void sellStock(StockChild inStock, int inNumSold) {
         RemoveStock rStock = new RemoveStock(assets, inStock, inNumSold);
+        undoStack.push(rStock);
+        redoStack.clear();
         placeOrder(rStock);
     }
 
     //handle cash account creation, call invoker
-    public void addAcct(double inWorth, String inName) {
-        MakeAccount mAcct = new MakeAccount(assets, inWorth, inName);
+    public void addAcct(double inWorth,int inIndex, String inName) {
+        MakeAccount mAcct = new MakeAccount(assets, inWorth, inName, inIndex);
+        undoStack.push(mAcct);
         placeOrder(mAcct);
     }
 
     //handle cass account removal, call invoker
-    public void remAcct(int inIndex) {
-        RemoveAccount rAcct = new RemoveAccount(assets, inIndex);
+    public void remAcct(int inIndex, int inWorth, String inName) {
+        RemoveAccount rAcct = new RemoveAccount(assets, inIndex,inName,inWorth );
+        undoStack.push(rAcct);
+        redoStack.clear();
         placeOrder(rAcct);
     }
 
-    //command invoker
+    //Checks to see if there are undoable commands, gets the most recent command, pops it, adds it to redo stack, calls undo
+    public void undo(){
+        if(undoStack.size() > 0 ) {
+            if (undoStack.lastElement() instanceof RemoveAccount) {
+                int size = undoStack.size() - 1;
+                RemoveAccount rmAcct = (RemoveAccount) undoStack.pop();
+                redoStack.add(rmAcct);
+                placeUndo(rmAcct);
+            }
+            if (undoStack.lastElement() instanceof MakeAccount) {
+                MakeAccount mAcct = (MakeAccount) undoStack.pop();
+                redoStack.add(mAcct);
+                placeUndo(mAcct);
+            }
+            if (undoStack.lastElement() instanceof BuyStock) {
+                BuyStock bStock = (BuyStock) undoStack.pop();
+                redoStack.add(bStock);
+                placeUndo(bStock);
+            }
+            if (undoStack.lastElement() instanceof RemoveStock) {
+                RemoveStock rStock = (RemoveStock) undoStack.pop();
+                redoStack.add(rStock);
+                placeUndo(rStock);
+            }
+        }
+    }
+
+    //Checks to see if there are redoable commands, gets the most recent undone command, pops it, adds it to undo stack, calls execute to redo
+    public void redo(){
+        if(redoStack.size() > 0) {
+            if (redoStack.lastElement() instanceof RemoveAccount) {
+                RemoveAccount rmAcct = (RemoveAccount) redoStack.pop();
+                undoStack.add(rmAcct);
+                placeOrder(rmAcct);
+            }
+            if (redoStack.lastElement() instanceof MakeAccount) {
+                MakeAccount mAcct = (MakeAccount) redoStack.pop();
+                undoStack.add(mAcct);
+                placeOrder(mAcct);
+            }
+            if (redoStack.lastElement() instanceof BuyStock) {
+                BuyStock bStock = (BuyStock) redoStack.pop();
+                undoStack.add(bStock);
+                placeOrder(bStock);
+            }
+            if (redoStack.lastElement() instanceof RemoveStock) {
+                RemoveStock rStock = (RemoveStock) redoStack.pop();
+                undoStack.add(rStock);
+                placeOrder(rStock);
+            }
+        }
+    }
+    //command invokers
     public void placeOrder(Order order) {
         order.execute();
     }
-
+    public void placeUndo(Order order) {order.undo();}
     public boolean loadPortfolio() {
         JFileChooser f = new JFileChooser();
         File dir = new File(f.getCurrentDirectory().toString().concat("\\Users"));

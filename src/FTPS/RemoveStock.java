@@ -20,4 +20,5 @@ public class RemoveStock implements Order {
     public void execute() {
         asset.DelStock(stock, quantity);
     }
+    public void undo(){asset.AddStock(quantity,stock);}
 }

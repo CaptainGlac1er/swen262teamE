@@ -8,10 +8,14 @@ public class RemoveAccount implements Order {
     //needed data
     private Assets asset;
     private int index;
+    private double worth;
+    private String name;
 
     //set data
-    public RemoveAccount(Assets inAsset, int inIndex) {
+    public RemoveAccount(Assets inAsset, int inIndex, String inName, double inWorth) {
         index = inIndex;
+        worth = inWorth;
+        name = inName;
         asset = inAsset;
     }
 
@@ -19,4 +23,5 @@ public class RemoveAccount implements Order {
     public void execute() {
         asset.DelCashAccount(index);
     }
+    public void undo(){asset.AddCashAccount(worth,name);}
 }

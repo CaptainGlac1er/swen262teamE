@@ -9,16 +9,21 @@ public class MakeAccount implements Order {
     private Assets asset;
     private double worth;
     private String name;
+    private int index;
 
     //constructor, sets data
-    public MakeAccount(Assets inAsset, double inWorth, String inName) {
+    public MakeAccount(Assets inAsset, double inWorth, String inName,int inIndex) {
         worth = inWorth;
         name = inName;
         asset = inAsset;
+        index = inIndex;
     }
 
     //handles execute call
     public void execute() {
         asset.AddCashAccount(worth, name);
+    }
+    public void undo(){
+        asset.DelCashAccount(index);
     }
 }
