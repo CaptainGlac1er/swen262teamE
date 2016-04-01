@@ -11,43 +11,71 @@ import java.util.ArrayList;
 public class StockDB implements Runnable
 {
     private ArrayList<StockChild> AllStocks = new ArrayList<>();
-    private String tName = "Stock Update Thread";
     private static StockDB DBInstance;
 
     private StockDB()
     {
+        //method to load initial stock information
         getAllStocks();
     }
 
     public static StockDB getInstance()
     {
+        //if database has been created
         if (DBInstance != null)
+
+            //return instance of database
             return DBInstance;
 
+        //create database
         DBInstance = new StockDB();
+
+        //return database
         return DBInstance;
     }
 
     private void getAllStocks() {
         StockChild tempStock;
+
+        //create string for file path to equities file
         String filepath = (new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() + "\\equities.csv";
-        try {
+        try
+        {
             String currentLine;
+
+            //open reader
             BufferedReader br = new BufferedReader(new FileReader(filepath));
 
-            while ((currentLine = br.readLine()) != null) {
+            //while file has more line
+            while ((currentLine = br.readLine()) != null)
+            {
+                //split lines into array
                 String[] info = currentLine.split("\"");
-                tempStock = new StockChild(info[3], info[1], info[7], 0);
-                AllStocks.add(tempStock);
+
+                //create new stock and store in stock array
+                try
+                {
+                    tempStock = new StockChild(info[3], info[1], info[7], Double.parseDouble(info[5]), 0);
+                    AllStocks.add(tempStock);
+                }
+
+                catch (NumberFormatException ex)
+                {
+                    System.out.println("Stock not created: " + info[3] + " " + ex );
+                }
             }
 
-        } catch (NumberFormatException | IOException e) {
+        }
+
+        catch (NumberFormatException | IOException e)
+        {
             System.out.println("File read error: " + e);
         }
     }
 
     public ArrayList<StockChild> getStocks()
     {
+        //get current instance of stock database
         return AllStocks;
     }
 
@@ -55,51 +83,68 @@ public class StockDB implements Runnable
     public void run()
     {
         double updatedWorth;
-        double i = 0;
+        String abbrList = null;
         System.out.println("Running update thread");
 
-        try {
-            for (StockChild child : AllStocks)
+        try
+        {
+            //for all stocks
+            for ( StockChild child : AllStocks )
             {
-                i++;
-                String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22" + child.getStockAbbr().trim() + "%22)&env=store://datatables.org/alltableswithkeys&format=json";
-
-                // Create a URL and open a connection
-                URL YahooURL = new URL(url);
-                HttpURLConnection con = (HttpURLConnection) YahooURL.openConnection();
-
-                // Set the HTTP Request type method to GET (Default: GET)
-                con.setRequestMethod("GET");
-                con.setConnectTimeout(100000);
-                con.setReadTimeout(100000);
-
-                // Created a BufferedReader to read the contents of the request.
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-                String inputLine;
-
-                while ((inputLine = in.readLine()) != null)
+                //if first stock
+                if (abbrList == null)
                 {
-
-                    updatedWorth = parseInput(inputLine);
-
-                    if (updatedWorth != 0 )
-                        child.setWorth(updatedWorth);
+                    //set string to stock abbr
+                    abbrList = child.getStockAbbr().trim();
                 }
-
-                // MAKE SURE TO CLOSE YOUR CONNECTION!
-                in.close();
-
-                //print progress percentage
-                if (i % 20 == 0)
-                    System.out.println((int) (i / AllStocks.size() * 100) + "%");
+                else
+                {
+                    //append to string of abbr
+                    abbrList += "+" + child.getStockAbbr().trim();
+                }
             }
+
+            URL yahoo = new URL("http://finance.yahoo.com/d/quotes.csv?s="+ abbrList + "&f=l1");
+            // Create a URL and open a connection
+//            URL YahooURL = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) yahoo.openConnection();
+
+            // Set the HTTP Request type method to GET (Default: GET)
+            con.setRequestMethod("GET");
+            con.setConnectTimeout(100000);
+            con.setReadTimeout(100000);
+
+            // Created a BufferedReader to read the contents of the request.
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+
+            //for all stocks
+            for ( StockChild child : AllStocks )
+            {
+                //read next line
+                inputLine = in.readLine();
+
+                //store new price
+                updatedWorth = parseInput(inputLine);
+
+                //if price existed and converted then store in stock
+                if (updatedWorth != 0)
+                    child.setWorth(updatedWorth);
+            }
+
+            // MAKE SURE TO CLOSE YOUR CONNECTION!
+            in.close();
+
+
         }
 
         catch ( IOException ex)
         {
             System.out.println("Stock update thread error" + ex);
         }
+
+        System.out.println("Update complete.");
     }
 
     public void start()
@@ -108,7 +153,7 @@ public class StockDB implements Runnable
 
         //print message to screen and begin running thread
         System.out.println("*** Starting stock thread. ***");
-        stockT = new Thread( this, tName);
+        stockT = new Thread( this, "StockDB Thread");
         stockT.start();
     }
 
@@ -116,24 +161,17 @@ public class StockDB implements Runnable
     {
         double newWorth = 0;
 
-        //split line and remove extra characters from needed "Bid" field
-        String[] linearray = inFullline.split("(:)|(,)");
-        linearray[18] = linearray[18].replaceAll("[^0-9.]", "");
-
-        //if the bid field is not null
-        if (linearray[18] != null)
+        try
         {
-            try
-            {
-                //convert string to double and store
-                newWorth = Double.parseDouble(linearray[18]);
-            }
-            catch(NumberFormatException e)
-            {
-                System.out.println("Error converting new worth" + e);
-            }
+            //convert string to double and store
+            newWorth = Double.parseDouble(inFullline);
         }
+
+        catch(NumberFormatException e)
+        {
+            System.out.println("Error converting new worth" + e);
+        }
+
         return newWorth;
     }
 }
-

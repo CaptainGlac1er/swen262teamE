@@ -21,6 +21,7 @@ public class FTPS {
         new SystemGUI(this);
         userStorage = new HashMap<>();
         LoadUsers();
+        StockDB.getInstance().start();
     }
 
     public static void main(String[] args) {
