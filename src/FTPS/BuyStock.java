@@ -21,5 +21,5 @@ public class BuyStock implements Order {
     public void execute() {
         asset.AddStock(quantity, stock);
     }
-    public void undo() {} {asset.DelStock(stock,quantity);}
+    public void undo() {asset.DelStock(stock,quantity);}
 }

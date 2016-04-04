@@ -1,140 +1,38 @@
 package FTPS;
 
 import javax.swing.*;
-import java.io.*;
-import java.util.HashMap;
+import java.awt.*;
 
-/**
- * Created by CaptainGlac1er on 3/4/2016.
- */
-public class FTPS {
-    private static HashMap<String, Integer> userStorage; //storage for userdata
-    JTextField userText; //username used later
-    JTextField passwordText; //password used later
-
-    /**
-     * intiliazes user hashmap (calls LoadUsers) and the GUI
-     */
-    public FTPS() {
-        //System fsystem = new System();
-        new SystemGUI(this);
-        userStorage = new HashMap<>();
-        LoadUsers();
-        StockDB.getInstance().start();
-    }
-
+public class FTPS extends JFrame implements Updatable {
+    private PageBackend currentBackend;
+    private JPanel currentPage = new JPanel();
     public static void main(String[] args) {
         new FTPS();
     }
-
-    /**
-     * Loads text file and puts them into user info hashmap
-     */
-    public static void LoadUsers() {
-        JFileChooser f = new JFileChooser();
-        File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-        try {
-
-            if (!checkfile.exists()) {
-                PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-                writer.println("Username,Password");
-                writer.close();
-            }
-
-            String currentLine;
-            BufferedReader br = new BufferedReader(new FileReader(checkfile));
-
-            while ((currentLine = br.readLine()) != null) {
-                if ((currentLine.equals("Username,Password"))) {
-                    continue;
-                }
-                String[] info = currentLine.split(",");
-                userStorage.put(info[0], Integer.parseInt(info[1]));
-            }
-        }
-        catch (FileNotFoundException || IOException e){
-            System.out.println("Load User error:\n" + e.printStackTrace());
-        }
+    private PageUpdater pageHandler = new PageUpdater();
+    public FTPS(){
+        new LoginBack(pageHandler);
+        this.setSize(300, 300);
+        this.setVisible(true);
+        this.add(currentPage);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pageHandler.register(this);
+        StockDB.getInstance().start();
     }
-
-    /**
-     * Checks if user info is correct and logs them in if it is
-     * else it gives an alert that the information was incorrect
-     *
-     * @param username
-     * @param password
-     */
-    public boolean LoginAction(String username, String password) {
-
-        if (PasswordCheck(username, password)) {
-            //java.lang.System.out.println("logged in " + username + " " + f.getCurrentDirectory().toString());
-            User user = new User(username);
-            user.openPortfolio();
-            return true;
-            //load user portfolio
-            //new portfolio();
-        } else {
-            //incorrect password or username alert
-            JOptionPane.showMessageDialog(null, "Error Logging in " + username);
-            return false;
-        }
-
+    @Override
+    public void update() {
 
     }
-
-    /**
-     * Writes the user info into text file if it is new
-     *
-     * @param username
-     * @param password
-     */
-    public boolean RegisterAction(String username, String password) {
-        JFileChooser f = new JFileChooser();
-        File checkfile = new File(f.getCurrentDirectory().toString().concat("/UserInfo.txt"));
-
-        if (userStorage.isEmpty() || !userStorage.containsKey(username)) {
-            userStorage.put(username, Hasher(password));
-            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(checkfile, true)))) {
-                out.println(username + "," + Hasher(password));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            LoginAction(username, password);
-            return true;
-
-        } else {
-            //User already exists alert GUI
-            JOptionPane.showMessageDialog(null, "User already in system");
-            return false;
-        }
-
-    }
-
-    /**
-     * @param password
-     * @return
-     */
-    public int Hasher(String password) {
-        int i = 0;
-        int hashedvalue = 0;
-        while (i < password.length()) {
-            hashedvalue += (password.charAt(i) * 31);
-            i++;
-        }
-        return hashedvalue;
-    }
-
-    /**
-     * @param username
-     * @param password
-     * @return
-     */
-    public Boolean PasswordCheck(String username, String password) {
-        if (!userStorage.isEmpty()) {
-            if (userStorage.get(username) != null && Hasher(password) == (userStorage.get(username))) {
-                return true;
-            }
-        }
-        return false;
+    public void update(PageGUI newPage, PageBackend newBackend){
+        currentBackend = newBackend;
+        currentPage.removeAll();
+        this.setTitle(newPage.getPageTitle());
+        System.out.println("Setting page to " + newPage.getClass() + " which has " + newPage.getPage().getComponents().length + " components");
+        ((new JFrame()).add(newPage.getPage())).setVisible(true);
+        currentPage.add(newPage.getPage(), BorderLayout.CENTER);
+        currentPage.revalidate();
+        currentPage.repaint();
+        this.pack();
+        System.out.println("Thia page has " + this.getComponents().length + " components");
     }
 }

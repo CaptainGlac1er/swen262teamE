@@ -38,7 +38,7 @@ public class StockDB implements Runnable
         StockChild tempStock;
 
         //create string for file path to equities file
-        String filepath = (new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() + "\\equities.csv";
+        String filepath = /*(new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() +*/ "C:\\equities.csv";
         try
         {
             String currentLine;

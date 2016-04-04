@@ -11,7 +11,7 @@ public class Assets {
 
     //store different types of portfolio data
     private ArrayList<StockChild> stockList;
-    private List<CashAccount> cashAccountList;
+    private ArrayList<CashAccount> cashAccountList;
     private ArrayList<Transactions> transactionsList;
     private int accountCount = 0;
 
@@ -154,7 +154,7 @@ public class Assets {
         return stockList;
     }
 
-    public List<CashAccount> GetAccounts() {
+    public ArrayList<CashAccount> GetAccounts() {
         return cashAccountList;
     }
 
