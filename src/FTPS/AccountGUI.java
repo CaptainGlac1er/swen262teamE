@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class AccountGUI extends PageGUI {
     AccountBackend accountBackend;
     AccountUpdater accountUpdater;
-    public AccountGUI(AccountBackend backend, AccountUpdater updater){
+    Portfolio portfolio;
+    public AccountGUI(AccountBackend backend, AccountUpdater updater, Portfolio portfolio){
+        this.portfolio = portfolio;
         accountBackend = backend;
         accountUpdater = updater;
         panel.setLayout(new BorderLayout());
@@ -38,6 +40,7 @@ public class AccountGUI extends PageGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 accountBackend.makeAccount(newAccount.getText());
+                newAccount.setText("");
             }
         });
         bottomBar.add(newAccount);
@@ -55,7 +58,7 @@ public class AccountGUI extends PageGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    new CashAccountGUI(c);
+                    new CashAccountGUI(c, portfolio);
                 }
             }
         });
@@ -63,5 +66,15 @@ public class AccountGUI extends PageGUI {
         panel.add(name);
         panel.add(price);
         return panel;
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Accounts updated");
+        clear();
+        addComponents();
+        panel.revalidate();
+        panel.repaint();
+
     }
 }

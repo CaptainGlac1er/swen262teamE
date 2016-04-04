@@ -13,7 +13,7 @@ public class AssetsBackend extends PageBackend {
     public AssetsBackend(PageUpdater pageUpdater, Portfolio portfolio){
         this.portfolio = portfolio;
         this.pageUpdater = pageUpdater;
-        setGUI(new AssetsGUI(this, new AssetsUpdater()));
+        setGUI(new AssetsGUI(this, new AssetsUpdater(), portfolio));
 
     }
     @Override

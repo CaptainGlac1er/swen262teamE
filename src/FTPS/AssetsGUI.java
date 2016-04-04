@@ -13,7 +13,9 @@ import java.awt.event.MouseEvent;
 public class AssetsGUI extends PageGUI implements Updatable{
     private AssetsBackend assetsBackend;
     private AssetsUpdater assetsUpdater;
-    public AssetsGUI(AssetsBackend assetsBackend, AssetsUpdater assetsUpdater){
+    Portfolio portfolio;
+    public AssetsGUI(AssetsBackend assetsBackend, AssetsUpdater assetsUpdater, Portfolio portfolio){
+        this.portfolio = portfolio;
         this.assetsBackend = assetsBackend;
         this.assetsUpdater = assetsUpdater;
         addComponents();
@@ -55,7 +57,7 @@ public class AssetsGUI extends PageGUI implements Updatable{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    new StockGUI(info);
+                    new StockGUI(info,portfolio);
                 }
             }
         });

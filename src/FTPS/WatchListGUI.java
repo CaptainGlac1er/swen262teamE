@@ -11,7 +11,9 @@ import java.awt.event.MouseEvent;
 public class WatchListGUI extends PageGUI {
     WatchListBackend watchListBackend;
     WatchListUpdater watchListUpdater;
-    public WatchListGUI(WatchListBackend backend, WatchListUpdater updater){
+    Portfolio portfolio;
+    public WatchListGUI(WatchListBackend backend, WatchListUpdater updater, Portfolio portfolio){
+        this.portfolio = portfolio;
         watchListBackend = backend;
         watchListUpdater = updater;
         addComponents();
@@ -35,7 +37,7 @@ public class WatchListGUI extends PageGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    new StockGUI(info);
+                    new StockGUI(info, portfolio);
                 }
             }
         });
@@ -43,5 +45,10 @@ public class WatchListGUI extends PageGUI {
         panel.add(price);
 
         return panel;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

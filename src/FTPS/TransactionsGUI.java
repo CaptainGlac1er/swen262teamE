@@ -36,9 +36,6 @@ public class TransactionsGUI extends PageGUI implements Updatable {
 
         return panel;
     }
-    public void clear(){
-        panel.removeAll();
-    }
     @Override
     public void update() {
         clear();

@@ -2,12 +2,14 @@ package FTPS;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by CaptainGlac1er on 4/3/2016.
  */
 public class StockGUI extends JFrame {
-    public StockGUI(StockChild info){
+    public StockGUI(StockChild info, Portfolio portfolio){
         this.setTitle(info.getStockName());
         JFrame stockFrame = this;
         stockFrame.setPreferredSize(new Dimension(300,300));
@@ -26,6 +28,12 @@ public class StockGUI extends JFrame {
         buysell.setColumns(20);
         bottom.add(buysell);
         JButton buyButton = new JButton("Buy");
+        buyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         JButton sellButton = new JButton("Sell");
         bottom.add(buyButton);
         bottom.add(sellButton);

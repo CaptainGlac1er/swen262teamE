@@ -53,6 +53,14 @@ public class Portfolio {
         placeOrder(mAcct);
     }
 
+    //handle cash deposits
+    public void depositCash(CashAccount c, double amount){
+        DepositMoney dAcct = new DepositMoney(c, amount);
+        undoStack.push(dAcct);
+        redoStack.clear();
+        placeOrder(dAcct);
+    }
+
     //handle cass account removal, call invoker
     public void remAcct(int inIndex, int inWorth, String inName) {
         RemoveAccount rAcct = new RemoveAccount(assets, inIndex,inName,inWorth );

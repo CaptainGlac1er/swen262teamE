@@ -62,4 +62,9 @@ public class LoginGUI extends PageGUI {
         panel.add(buttons);
 
     }
+
+    @Override
+    public void update() {
+
+    }
 }

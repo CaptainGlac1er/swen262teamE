@@ -5,9 +5,11 @@ package FTPS;
  */
 public class WatchListBackend extends PageBackend implements Updatable {
     PageUpdater pageUpdater;
-    public WatchListBackend(PageUpdater updater){
+    Portfolio portfolio;
+    public WatchListBackend(PageUpdater updater, Portfolio portfolio){
+        this.portfolio = portfolio;
         pageUpdater = updater;
-        setGUI(new WatchListGUI(this, new WatchListUpdater()));
+        setGUI(new WatchListGUI(this, new WatchListUpdater(), portfolio));
     }
 
     @Override

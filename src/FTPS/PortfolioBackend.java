@@ -16,7 +16,7 @@ public class PortfolioBackend extends PageBackend implements Updatable {
         portfolio = new Portfolio(user, this);
         assetsBackend = new AssetsBackend(new PageUpdater(), portfolio);
         accountBackend = new AccountBackend(new PageUpdater(), portfolio);
-        watchListBackend = new WatchListBackend(new PageUpdater());
+        watchListBackend = new WatchListBackend(new PageUpdater(), portfolio);
         transactionsBackend = new TransactionsBackend(new PageUpdater(), portfolio);
         portfolioGUI = new PortfolioGUI(this, new PortfolioUpdater(), (AccountGUI)accountBackend.getPage(), (AssetsGUI)assetsBackend.getPage(), (WatchListGUI)watchListBackend.getPage(), (TransactionsGUI) transactionsBackend.getPage());
         setGUI(portfolioGUI);

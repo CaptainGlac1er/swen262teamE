@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by George Walter Colrove IV on 3/22/2016.
  */
-public abstract class PageGUI {
+public abstract class PageGUI implements Updatable {
     protected String pageTitle = "";
     protected JPanel panel = new JPanel();
     public JPanel getPage(){
@@ -13,5 +13,8 @@ public abstract class PageGUI {
     }
     public String getPageTitle(){ return pageTitle; }
     public abstract void addComponents();
+    public void clear(){
+        panel.removeAll();
+    }
 
 }
