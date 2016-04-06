@@ -36,12 +36,5 @@ public class User {
         return username;
     }
 
-    /**
-     * @return
-     */
-    public boolean openPortfolio() {
-        port = new Portfolio(this);
-        return true;
-    }
 
 }

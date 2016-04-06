@@ -13,13 +13,15 @@ public class SearchStockGUI extends JFrame {
     SearchStock searchStock;
     JFrame frame = this;
     JPanel results;
-    StockBack output;
+    PageBackend output;
+    Portfolio portfolio;
 
     /**
      * @param searchStock
      * @param output
      */
-    public SearchStockGUI(SearchStock searchStock, StockBack output) {
+    public SearchStockGUI(SearchStock searchStock, PageBackend output, Portfolio portfolio) {
+        this.portfolio = portfolio;
         this.output = output;
         this.searchStock = searchStock;
         addSearchBar();
@@ -74,10 +76,10 @@ public class SearchStockGUI extends JFrame {
         select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BuyStock newOrder = new BuyStock(output.portfolio.getAssets(), stock, 0);
-                newOrder.execute();
+                portfolio.buyStock(stock, 0);
+                output.update();
                 frame.dispose();
-                output.addStocks();
+                //output.addStocks();
             }
         });
         panel.setPreferredSize(new Dimension(600, 50));

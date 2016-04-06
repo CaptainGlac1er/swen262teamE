@@ -11,9 +11,9 @@ public class SearchStock {
     /**
      * Create SearchStock object used to be able to search the stock database
      *
-     * @param stocks array of the stocks in the stock database
      */
     public SearchStock() {
+        stocks = StockDB.getInstance().getStocks();
 
     }
 

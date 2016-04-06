@@ -6,92 +6,40 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by CaptainGlac1er on 3/4/2016.
+ * Created by CaptainGlac1er on 4/3/2016.
  */
 public class StockGUI extends JFrame {
-    JFrame frame = this;
-    JPanel infoPanel;
-    StockBack backend;
+    public StockGUI(StockChild info, Portfolio portfolio){
+        this.setTitle(info.getStockName());
+        JFrame stockFrame = this;
+        stockFrame.setPreferredSize(new Dimension(300,300));
+        JPanel panel = new JPanel();
+        JLabel ticker = new JLabel(info.getStockAbbr());
+        ticker.setFont(new Font("Arial", Font.PLAIN, 20));
+        panel.add(ticker, BorderLayout.NORTH);
+        JLabel price = new JLabel(info.getWorth() +"");
+        panel.add(price);
 
-    /**
-     * creates the GUI object and makes the GUI
-     * @param back backend that supports the GUI
-     */
-    public StockGUI(StockBack back) {
-        backend = back;
-        JLabel testLabel = new JLabel("Test User");
-        this.add(testLabel, BorderLayout.NORTH);
+        JLabel owned = new JLabel(info.getCount() + "");
+        panel.add(owned);
 
-        this.setSize(650, 400);
-        setVisible(true);
-        infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(infoPanel);
-        frame.add(scrollPane, BorderLayout.CENTER);
-
-        JButton addStock = new JButton("Buy new stock");
-        addStock.addActionListener(new ActionListener() {
+        JPanel bottom = new JPanel();
+        JTextField buysell = new JTextField();
+        buysell.setColumns(20);
+        bottom.add(buysell);
+        JButton buyButton = new JButton("Buy");
+        buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StockChild stock = null;
-                addStockRow(stock);
-                new SearchStockGUI(new SearchStock(), backend);
-            }
-        });
-        frame.add(addStock, BorderLayout.SOUTH);
-    }
-
-    /**
-     * clears the board
-     */
-    public void clear() {
-        infoPanel.removeAll();
-        infoPanel.revalidate();
-        infoPanel.repaint();
-    }
-
-    /**
-     * Adds a row to the GUI
-     * @param stock stock to get data from and affect
-     */
-    public void addStockRow(StockChild stock) {
-        JPanel row = new JPanel(new GridLayout(1, 5));
-
-        row.setPreferredSize(new Dimension(600, 60));
-        JLabel ticker = new JLabel("");
-        JLabel price = new JLabel("");
-        if (stock != null) {
-            ticker.setText(stock.getStockAbbr());
-            price.setText(stock.getWorth() + "x" + stock.getCount() + "=" + stock.getTotWorth());
-            stock.addObserver(price);
-        }
-        JTextField buySell = new JTextField();
-        JButton buy = new JButton("Buy");
-        buy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                BuyStock newOrder = new BuyStock(backend.portfolio.getAssets(), stock, Integer.parseInt(buySell.getText()));
-                newOrder.execute();
-            }
-        });
-        JButton sell = new JButton("Sell");
-        sell.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RemoveStock newOrder = new RemoveStock(backend.portfolio.getAssets(), stock, Integer.parseInt(buySell.getText()));
-                newOrder.execute();
 
             }
         });
-
-
-        row.add(ticker);
-        row.add(price);
-        row.add(buySell);
-        row.add(buy);
-        row.add(sell);
-        infoPanel.add(row);
-        frame.revalidate();
-        frame.repaint();
+        JButton sellButton = new JButton("Sell");
+        bottom.add(buyButton);
+        bottom.add(sellButton);
+        panel.add(bottom, BorderLayout.SOUTH);
+        stockFrame.add(panel);
+        stockFrame.pack();
+        stockFrame.setVisible(true);
     }
 }

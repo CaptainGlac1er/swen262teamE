@@ -18,11 +18,12 @@ public class Portfolio {
     PortEngine portEngine;
     Stack undoStack = new Stack();
     Stack redoStack = new Stack();
-    public Portfolio(User user) {
+    PortfolioBackend portfolioBackend;
+    public Portfolio(User user, PortfolioBackend portfolioBackend) {
+        this.portfolioBackend = portfolioBackend;
         this.portEngine = new PortEngine();
         this.user = user;
         loadPortfolio();
-        new PortfolioGUI(user, this);
     }
 
     public Assets getAssets() {
@@ -50,6 +51,14 @@ public class Portfolio {
         MakeAccount mAcct = new MakeAccount(assets, inWorth, inName, inIndex);
         undoStack.push(mAcct);
         placeOrder(mAcct);
+    }
+
+    //handle cash deposits
+    public void depositCash(CashAccount c, double amount){
+        DepositMoney dAcct = new DepositMoney(c, amount);
+        undoStack.push(dAcct);
+        redoStack.clear();
+        placeOrder(dAcct);
     }
 
     //handle cass account removal, call invoker
@@ -115,6 +124,7 @@ public class Portfolio {
     //command invokers
     public void placeOrder(Order order) {
         order.execute();
+        portfolioBackend.update();
     }
     public void placeUndo(Order order) {order.undo();}
     public boolean loadPortfolio() {
@@ -242,5 +252,15 @@ public class Portfolio {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //Get total worth
+    public double totalValue(){
+        double total = 0;
+        for(CashAccount c : assets.GetAccounts())
+            total += c.getAccountWorth();
+        for(StockChild s : assets.GetStocks())
+            total += s.getWorth() * s.getCount();
+        return total;
     }
 }
