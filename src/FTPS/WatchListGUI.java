@@ -1,3 +1,6 @@
+/**
+ * Created by Steven on 4/7/2016.
+ */
 package FTPS;
 
 import javax.swing.*;
@@ -9,13 +12,13 @@ import java.awt.event.MouseEvent;
  * Created by CaptainGlac1er on 3/31/2016.
  */
 public class WatchListGUI extends PageGUI {
-    WatchListBackend watchListBackend;
-    WatchListUpdater watchListUpdater;
+    //WatchListBackend watchListBackend;
+    //WatchListUpdater watchListUpdater;
     Portfolio portfolio;
-    public WatchListGUI(WatchListBackend backend, WatchListUpdater updater, Portfolio portfolio){
+    public WatchListGUI(Portfolio portfolio){
         this.portfolio = portfolio;
-        watchListBackend = backend;
-        watchListUpdater = updater;
+        //watchListBackend = backend;
+        //watchListUpdater = updater;
         addComponents();
     }
     @Override
