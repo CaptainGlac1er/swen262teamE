@@ -15,7 +15,7 @@ public class FTPS extends JFrame implements Updatable {
         this.setSize(300, 300);
         this.setVisible(true);
         this.add(currentPage);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         pageHandler.register(this);
         StockDB.getInstance().start();
     }
@@ -32,6 +32,7 @@ public class FTPS extends JFrame implements Updatable {
         currentPage.add(newPage.getPage(), BorderLayout.CENTER);
         currentPage.revalidate();
         currentPage.repaint();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         System.out.println("Thia page has " + this.getComponents().length + " components");
     }
