@@ -85,7 +85,6 @@ public class Assets {
                 if (stockList.contains(stock)) {
                     int position = stockList.indexOf(stock);
                     StockChild tempStock = stockList.get(position);
-                    tempStock.incCount(quantity);
                     stockList.set(position, tempStock);
                     String count = Integer.toString(stock.getCount());
                     String amt = Double.toString(stock.getWorth());

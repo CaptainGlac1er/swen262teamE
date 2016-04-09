@@ -15,11 +15,12 @@ public class AssetsUpdater implements Updater {
 
     @Override
     public void unregister(Updatable o) {
-
+        updatableStocks.remove(o);
     }
 
     @Override
     public void notifyObserver() {
-
+        for(Updatable o: updatableStocks)
+            o.update();
     }
 }

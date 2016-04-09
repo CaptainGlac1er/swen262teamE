@@ -57,7 +57,8 @@ public class AssetsGUI extends PageGUI implements Updatable{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    new StockGUI(info,portfolio);
+                    StockGUI getStock = new StockGUI(info,portfolio);
+                    assetsUpdater.register(getStock);
                 }
             }
         });

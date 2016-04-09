@@ -27,11 +27,14 @@ public class AccountGUI extends PageGUI {
     @Override
     public void addComponents() {
         panel.setBackground(Color.yellow);
-        JPanel items = new JPanel();
-        items.setBackground(new Color(0,0,0,0));
+        JPanel data = new JPanel();
+        data.setLayout(new BoxLayout(data,BoxLayout.Y_AXIS));
+        ScrollPane pane = new ScrollPane();
+        pane.add(data);
+
         for(CashAccount c : accountBackend.getAccounts())
-            items.add(addAccountPanel(c.getAccountName(), c.getAccountWorth() + "", c));
-        panel.add(items, BorderLayout.CENTER);
+            data.add(addAccountPanel(c.getAccountName(), c.getAccountWorth() + "", c));
+        panel.add(pane, BorderLayout.CENTER);
         JPanel bottomBar = new JPanel();
         JTextField newAccount = new JTextField();
         newAccount.setColumns(20);

@@ -10,15 +10,18 @@ import java.util.ArrayList;
 public class AssetsBackend extends PageBackend {
     PageUpdater pageUpdater;
     Portfolio portfolio;
+    AssetsUpdater assetsUpdater;
     public AssetsBackend(PageUpdater pageUpdater, Portfolio portfolio){
         this.portfolio = portfolio;
         this.pageUpdater = pageUpdater;
-        setGUI(new AssetsGUI(this, new AssetsUpdater(), portfolio));
+        assetsUpdater = new AssetsUpdater();
+        setGUI(new AssetsGUI(this, assetsUpdater, portfolio));
 
     }
     @Override
     public void update() {
         ((AssetsGUI)getGUI()).update();
+        assetsUpdater.notifyObserver();
     }
     public void addStocks(){
     }
