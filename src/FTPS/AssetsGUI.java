@@ -71,6 +71,7 @@ public class AssetsGUI extends PageGUI implements Updatable{
         panel.add(ticker);
         panel.add(price);
         panel.add(totalValue);
+        panel.setMaximumSize( panel.getPreferredSize() );
         return panel;
     }
     public void clear(){

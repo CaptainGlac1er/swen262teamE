@@ -63,7 +63,7 @@ public class WatchListGUI extends PageGUI {
             }
         });
         panel.add(ticker);
-
+        panel.setMaximumSize( panel.getPreferredSize() );
         return panel;
     }
 

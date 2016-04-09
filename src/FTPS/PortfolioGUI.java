@@ -41,7 +41,6 @@ public class PortfolioGUI extends PageGUI implements Updatable{
 
         JPanel transactionPanel = transactionsGUI.getPage();
         transactionPanel.setPreferredSize(new Dimension(400, 300));
-        transactionPanel.setBackground(Color.blue);
         centerPanel.add(transactionPanel);
 
         JPanel watchList = watchListGUI.getPage();

@@ -29,7 +29,7 @@ public class LoginGUI extends PageGUI {
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
         JTextField username = new JTextField();
-        JTextField password = new JTextField();
+        JPasswordField password = new JPasswordField();
         fields.add(usernameLabel);
         fields.add(passwordLabel);
         fields.add(username);

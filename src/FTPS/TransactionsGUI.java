@@ -20,8 +20,13 @@ public class TransactionsGUI extends PageGUI implements Updatable {
         data.setLayout(new BoxLayout(data,BoxLayout.Y_AXIS));
         ScrollPane pane = new ScrollPane();
         pane.add(data);
-        for(Transactions t : transactionsBackend.getTransactions())
+        for(Transactions t : transactionsBackend.getTransactions()) {
             data.add(item(t.getTime(), t.getType(), t.getInfo()));
+            JPanel spacer = new JPanel();
+            spacer.setPreferredSize(new Dimension(370, 20));
+            spacer.setMaximumSize(spacer.getPreferredSize());
+            data.add(spacer);
+        }
         panel.setLayout(new BorderLayout());
         panel.add(pane, BorderLayout.CENTER);
     }
@@ -33,6 +38,8 @@ public class TransactionsGUI extends PageGUI implements Updatable {
         panel.add(leftLabel);
         panel.add(middleLabel);
         panel.add(rightLabel);
+        panel.setPreferredSize(new Dimension(370, 60));
+        panel.setMaximumSize( panel.getPreferredSize() );
 
         return panel;
     }

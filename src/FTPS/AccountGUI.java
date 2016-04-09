@@ -26,7 +26,6 @@ public class AccountGUI extends PageGUI {
 
     @Override
     public void addComponents() {
-        panel.setBackground(Color.yellow);
         JPanel data = new JPanel();
         data.setLayout(new BoxLayout(data,BoxLayout.Y_AXIS));
         ScrollPane pane = new ScrollPane();
@@ -68,6 +67,7 @@ public class AccountGUI extends PageGUI {
 
         panel.add(name);
         panel.add(price);
+        panel.setMaximumSize( panel.getPreferredSize() );
         return panel;
     }
 
