@@ -19,6 +19,11 @@ public class Portfolio {
     Stack undoStack = new Stack();
     Stack redoStack = new Stack();
     PortfolioBackend portfolioBackend;
+
+    public WatchListStock getWatchList() {
+        return watchList;
+    }
+
     WatchListStock watchList;
     public Portfolio(User user, PortfolioBackend portfolioBackend) {
         this.portfolioBackend = portfolioBackend;
@@ -227,7 +232,7 @@ public class Portfolio {
     public void savePortfolio(File checkfile) {
         try {
             PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
-            writer.println("3");
+            writer.println("4");
             int accountCount = assets.GetAccounts().size();
             writer.println(accountCount);
             for (CashAccount a : assets.GetAccounts()) {
@@ -250,10 +255,10 @@ public class Portfolio {
                 writer.println(transaction.getInfo());
                 writer.println(transaction.getTime());
             }
-            int watchCount = assets.GetStocks().size();
+            int watchCount = watchList.getWatchList().size();
             writer.println(watchCount);
             for (WatchStock w : watchList.getWatchList()) {
-                writer.println("s");
+                writer.println("w");
                 StockChild s = w.getStockInfo();
                 writer.println(s.getStockAbbr());
                 writer.println(s.getCount());

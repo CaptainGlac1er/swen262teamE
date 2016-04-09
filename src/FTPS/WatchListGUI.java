@@ -7,6 +7,8 @@ package FTPS;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -29,14 +31,28 @@ public class WatchListGUI extends PageGUI {
         //panel.add(addWatchItem());
         JPanel bottom = new JPanel();
         JButton addStock = new JButton("Add Stock");
+        addStock.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    new WatchListSearch(new SearchStock(), watchListBackend, portfolio.getWatchList());
+            }
+        });
+        JPanel data = new JPanel();
+        data.setLayout(new BoxLayout(data,BoxLayout.Y_AXIS));
+        ScrollPane pane = new ScrollPane();
+        pane.add(data);
+        for(WatchStock w : portfolio.getWatchList().getWatchList()) {
+            StockChild c = w.getStockInfo();
+            data.add(addWatchItem(c.getStockAbbr() + " ",  c));
+        }
+        panel.add(pane);
         bottom.add(addStock);
         panel.add(bottom, BorderLayout.SOUTH);
         panel.setBackground(Color.gray);
     }
-    public JPanel addWatchItem(String left, String right, StockChild info){
+    public JPanel addWatchItem(String left, StockChild info){
         JPanel panel = new JPanel();
         JLabel ticker = new JLabel(left);
-        JLabel price = new JLabel(right);
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,13 +63,15 @@ public class WatchListGUI extends PageGUI {
             }
         });
         panel.add(ticker);
-        panel.add(price);
 
         return panel;
     }
 
     @Override
     public void update() {
-
+        clear();
+        addComponents();
+        panel.revalidate();
+        panel.repaint();
     }
 }

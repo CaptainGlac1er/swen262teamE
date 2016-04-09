@@ -14,6 +14,6 @@ public class WatchListBackend extends PageBackend implements Updatable {
 
     @Override
     public void update() {
-
+        getGUI().update();
     }
 }
