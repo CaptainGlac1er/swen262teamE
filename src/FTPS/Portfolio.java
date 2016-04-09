@@ -19,9 +19,11 @@ public class Portfolio {
     Stack undoStack = new Stack();
     Stack redoStack = new Stack();
     PortfolioBackend portfolioBackend;
+    WatchListStock watchList;
     public Portfolio(User user, PortfolioBackend portfolioBackend) {
         this.portfolioBackend = portfolioBackend;
         this.portEngine = new PortEngine();
+        watchList = new WatchListStock();
         this.user = user;
         loadPortfolio();
     }
@@ -181,6 +183,10 @@ public class Portfolio {
                             String date = scanner.nextLine();
                             assets.addTransaction(tranType, info, date);
                             break;
+                        case 'w':
+                            String WatchTicker = scanner.nextLine();
+                            watchList.addStockToWatchList(searchStock.getStock(WatchTicker), 0,0);
+                            break;
                     }
                 }
 
@@ -243,6 +249,14 @@ public class Portfolio {
                 writer.println(transaction.getType());
                 writer.println(transaction.getInfo());
                 writer.println(transaction.getTime());
+            }
+            int watchCount = assets.GetStocks().size();
+            writer.println(watchCount);
+            for (WatchStock w : watchList.getWatchList()) {
+                writer.println("s");
+                StockChild s = w.getStockInfo();
+                writer.println(s.getStockAbbr());
+                writer.println(s.getCount());
             }
             writer.close();
             JOptionPane.showMessageDialog(null, "Portfolio Saved");

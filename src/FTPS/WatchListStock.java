@@ -24,7 +24,7 @@ public class WatchListStock {
     public void beginTimer(int time){
         watchListTimer.schedule(new UpdateWatchTask(), time*1000);
     }
-    public ArrayList getWatchList(){
+    public ArrayList<WatchStock> getWatchList(){
         System.out.println(watchStocks);
         return watchStocks;
     }
