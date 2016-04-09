@@ -60,7 +60,8 @@ public class AccountGUI extends PageGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    new CashAccountGUI(c, portfolio);
+                    CashAccountGUI  modifyAccount = new CashAccountGUI(c, portfolio);
+                    accountUpdater.register(modifyAccount);
                 }
             }
         });
@@ -73,6 +74,7 @@ public class AccountGUI extends PageGUI {
 
     @Override
     public void update() {
+        accountUpdater.notifyObserver();
         System.out.println("Accounts updated");
         clear();
         addComponents();

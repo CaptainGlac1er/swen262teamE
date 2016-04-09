@@ -9,9 +9,12 @@ import java.awt.geom.Arc2D;
 /**
  * Created by CaptainGlac1er on 4/4/2016.
  */
-public class CashAccountGUI extends JFrame {
+public class CashAccountGUI extends JFrame implements Updatable {
     Portfolio portfolio;
+    CashAccount info;
+    JLabel balance;
     public CashAccountGUI(CashAccount info, Portfolio portfolio){
+        this.info = info;
         this.portfolio = portfolio;
         this.setTitle(info.getAccountName());
         JFrame accountFrame = this;
@@ -21,20 +24,19 @@ public class CashAccountGUI extends JFrame {
         JLabel accountName = new JLabel(info.getAccountName());
         accountName.setFont(new Font("Arial", Font.PLAIN, 20));
         panel.add(accountName, BorderLayout.NORTH);
-        JLabel balance = new JLabel(info.getAccountWorth() +"");
+        balance = new JLabel(info.getAccountWorth() +"");
         panel.add(balance);
 
 
         JPanel bottom = new JPanel();
         JTextField transaction = new JTextField();
-        transaction.setColumns(20);
+        transaction.setColumns(10);
         bottom.add(transaction);
         JButton deposit = new JButton("Deposit");
         deposit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 portfolio.depositCash(info, Double.parseDouble(transaction.getText()));
-                transaction.setText("$" + info.getAccountWorth());
             }
         });
         JButton withdraw = new JButton("Withdraw");
@@ -50,5 +52,11 @@ public class CashAccountGUI extends JFrame {
         accountFrame.add(panel);
         accountFrame.pack();
         accountFrame.setVisible(true);
+    }
+
+    @Override
+    public void update() {
+        balance.setText("$" + info.getAccountWorth());
+
     }
 }
