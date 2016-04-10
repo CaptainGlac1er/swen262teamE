@@ -41,6 +41,7 @@ public class LoginGUI extends PageGUI {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 updater.updateUsername(username.getText());
                 updater.updatePassword(password.getText());
                 backend.login();

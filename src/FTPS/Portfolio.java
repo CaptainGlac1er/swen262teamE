@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -28,9 +29,12 @@ public class Portfolio {
     public Portfolio(User user, PortfolioBackend portfolioBackend) {
         this.portfolioBackend = portfolioBackend;
         this.portEngine = new PortEngine();
-        watchList = new WatchListStock();
+        watchList = new WatchListStock(this);
         this.user = user;
         loadPortfolio();
+    }
+    public void update(){
+        portfolioBackend.update();
     }
 
     public Assets getAssets() {
@@ -80,23 +84,25 @@ public class Portfolio {
     //Checks to see if there are undoable commands, gets the most recent command, pops it, adds it to redo stack, calls undo
     public void undo(){
         if(undoStack.size() > 0 ) {
-            if (undoStack.lastElement() instanceof RemoveAccount) {
+            Object o = undoStack.lastElement();
+            System.out.println(o.toString());
+            if (o instanceof RemoveAccount) {
                 int size = undoStack.size() - 1;
                 RemoveAccount rmAcct = (RemoveAccount) undoStack.pop();
                 redoStack.add(rmAcct);
                 placeUndo(rmAcct);
             }
-            if (undoStack.lastElement() instanceof MakeAccount) {
+            if (o instanceof MakeAccount) {
                 MakeAccount mAcct = (MakeAccount) undoStack.pop();
                 redoStack.add(mAcct);
                 placeUndo(mAcct);
             }
-            if (undoStack.lastElement() instanceof BuyStock) {
+            if (o instanceof BuyStock) {
                 BuyStock bStock = (BuyStock) undoStack.pop();
                 redoStack.add(bStock);
                 placeUndo(bStock);
             }
-            if (undoStack.lastElement() instanceof RemoveStock) {
+            if (o instanceof RemoveStock) {
                 RemoveStock rStock = (RemoveStock) undoStack.pop();
                 redoStack.add(rStock);
                 placeUndo(rStock);
@@ -134,7 +140,10 @@ public class Portfolio {
         order.execute();
         portfolioBackend.update();
     }
-    public void placeUndo(Order order) {order.undo();}
+    public void placeUndo(Order order) {
+        order.undo();
+        portfolioBackend.update();
+    }
     public boolean loadPortfolio() {
         JFileChooser f = new JFileChooser();
         File dir = new File(f.getCurrentDirectory().toString().concat("\\Users"));

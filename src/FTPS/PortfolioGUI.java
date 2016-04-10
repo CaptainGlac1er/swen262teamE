@@ -84,6 +84,24 @@ public class PortfolioGUI extends PageGUI implements Updatable{
         });
         headerPanel.add(settings);
 
+        JButton redo = new JButton("redo");
+        redo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                portfolioBackend.getPortfolio().redo();
+            }
+        });
+        headerPanel.add(redo);
+
+        JButton undo = new JButton("Undo");
+        undo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                portfolioBackend.getPortfolio().undo();
+            }
+        });
+        headerPanel.add(undo);
+
 
         JPanel accountPanel = accountGUI.getPage();
         accountPanel.setPreferredSize(new Dimension(400, 300));

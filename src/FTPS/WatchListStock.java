@@ -16,13 +16,19 @@ public class WatchListStock {
     User user;
     WatchStock watchStock;
     ArrayList<WatchStock> watchStocks;
+    Portfolio portfolio;
 
 
-    public WatchListStock(){
+    public WatchListStock(Portfolio portfolio){
         watchStocks = new ArrayList<>();
+        this.portfolio = portfolio;
     }
-    public void beginTimer(int time){
-        watchListTimer.scheduleAtFixedRate(new UpdateWatchTask(), time *1000, time * 1000);
+    public boolean beginTimer(int time){
+        if(time > 30)
+            watchListTimer.scheduleAtFixedRate(new UpdateWatchTask(), time *1000, time * 1000);
+        else
+            return false;
+        return true;
         //watchListTimer.schedule(new UpdateWatchTask(), time*1000);
     }
     public ArrayList<WatchStock> getWatchList(){
@@ -73,6 +79,7 @@ public class WatchListStock {
             //WatchListStock watchListStock = new WatchListStock();
             //WatchListVisitor watchListVisitor = new WatchListVisitor();
             //System.out.println("I made it");
+            StockDB.getInstance().run();
             ArrayList<WatchStock> listOStocks;
             WatchListVisitor watchListVisitor = new WatchListVisitor();
             //System.out.println(listOStocks);
@@ -82,6 +89,7 @@ public class WatchListStock {
                 System.out.println(currentStock.getTriggertype());
                 if (currentStock.getTriggertype().equals("high")){
                     System.out.println("This stock's value is higher than the set trigger");
+
 
                 }
                 if (currentStock.getTriggertype().equals("low")){
@@ -94,6 +102,7 @@ public class WatchListStock {
                 }
 
             }
+            portfolio.update();
 
         }
 
