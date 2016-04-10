@@ -43,7 +43,7 @@ public class PortfolioGUI extends PageGUI implements Updatable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame settings = new JFrame();
-                settings.setSize(300,75);
+                settings.setSize(300,150);
                 JPanel settingsPanel = new JPanel();
                 JButton exportButton = new JButton("Export");
                 exportButton.addActionListener(new ActionListener() {
@@ -64,6 +64,20 @@ public class PortfolioGUI extends PageGUI implements Updatable{
                 });
                 settingsPanel.add(importButton);
 
+                JPanel refresh = new JPanel();
+                JTextField refreshRate = new JTextField();
+                refreshRate.setColumns(10);
+                refresh.add(refreshRate);
+                JButton refreshUpdateButton = new JButton("Update Refresh");
+                refreshUpdateButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int refresh = Integer.parseInt(refreshRate.getText());
+                        portfolioBackend.getPortfolio().getWatchList().beginTimer(refresh);
+                    }
+                });
+                refresh.add(refreshUpdateButton);
+                settingsPanel.add(refresh);
                 settings.add(settingsPanel);
                 settings.setVisible(true);
             }
