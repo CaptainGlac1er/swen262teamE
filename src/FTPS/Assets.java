@@ -35,14 +35,32 @@ public class Assets {
         transactionsList.add(transaction);
 
     }
-
+    
     public void loadCashAccount(double inWorth, String inName) {
         //account
         CashAccount acct = new CashAccount(inWorth, inName);
         cashAccountList.add(acct);
         accountCount++;
     }
+    //check inputs for validity, add money to one account, remove same amount from other
+    public void transferFunds(int fromAct, int toAct, double inAmt){
+        if(inAmt <= 0){
+            return;
+        }
+        else {
+            double fromVal = cashAccountList.get(toAct).getAccountWorth();
+            if(fromVal >= inAmt) {
+                cashAccountList.get(toAct).addCash(inAmt);
+                cashAccountList.get(fromAct).removeCash(inAmt);
+                String info = "Transfered $" + " From: " + cashAccountList.get(fromAct).getAccountName() + " to: " + cashAccountList.get(toAct).getAccountWorth();
+                Transactions transaction = new Transactions("Transfer", info);
+                transactionsList.add(transaction);
+            }
+            return;
+        }
 
+
+    }
     //find a cash account, remove it and record it
     public void DelCashAccount(int inAccountIndex) {
         //transaction

@@ -76,6 +76,7 @@ public class Portfolio {
         placeOrder(rAcct);
     }
 
+
     //Checks to see if there are undoable commands, gets the most recent command, pops it, adds it to redo stack, calls undo
     public void undo(){
         if(undoStack.size() > 0 ) {
