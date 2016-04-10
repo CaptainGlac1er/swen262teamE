@@ -43,7 +43,7 @@ public class PortfolioGUI extends PageGUI implements Updatable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame settings = new JFrame();
-                settings.setPreferredSize(new Dimension(300,75));
+                settings.setSize(300,75);
                 JPanel settingsPanel = new JPanel();
                 JButton exportButton = new JButton("Export");
                 exportButton.addActionListener(new ActionListener() {
