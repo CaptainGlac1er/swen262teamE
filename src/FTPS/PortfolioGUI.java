@@ -1,5 +1,7 @@
 package FTPS;
 
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,6 +36,40 @@ public class PortfolioGUI extends PageGUI implements Updatable{
         centerPanel.setPreferredSize(new Dimension(400, 600));
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
+        JPanel headerPanel = new JPanel();
+
+        JButton settings = new JButton("Settings");
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame settings = new JFrame();
+                settings.setPreferredSize(new Dimension(300,75));
+                JPanel settingsPanel = new JPanel();
+                JButton exportButton = new JButton("Export");
+                exportButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        portfolioBackend.getPortfolio().exportPortfolio(true);
+                    }
+                });
+                settingsPanel.add(exportButton);
+
+                JButton importButton = new JButton("Import");
+                importButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        portfolioBackend.getPortfolio().importPortfolio();
+                        portfolioBackend.update();
+                    }
+                });
+                settingsPanel.add(importButton);
+
+                settings.add(settingsPanel);
+                settings.setVisible(true);
+            }
+        });
+        headerPanel.add(settings);
+
 
         JPanel accountPanel = accountGUI.getPage();
         accountPanel.setPreferredSize(new Dimension(400, 300));
@@ -57,13 +93,14 @@ public class PortfolioGUI extends PageGUI implements Updatable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 portfolioBackend.savePortfolio();
+
             }
         });
         bottomPanel.add(saveButton);
         accountWorth = new JLabel("   Total Value: $" + portfolioBackend.getPortfolio().totalValue());
         bottomPanel.add(accountWorth, BorderLayout.EAST);
 
-
+        panel.add(headerPanel, BorderLayout.NORTH);
         panel.add(leftPanel, BorderLayout.LINE_START);
         panel.add(centerPanel, BorderLayout.CENTER);
         panel.add(rightPanel, BorderLayout.LINE_END);

@@ -37,6 +37,12 @@ public class Assets {
     }
 
     public void loadCashAccount(double inWorth, String inName) {
+        for(CashAccount c: cashAccountList){
+            if(c.getAccountName().equals(inName)){
+                c.addCash(inWorth);
+                return;
+            }
+        }
         //account
         CashAccount acct = new CashAccount(inWorth, inName);
         cashAccountList.add(acct);
@@ -55,6 +61,12 @@ public class Assets {
     }
 
     public void loadStock(int quality, StockChild stockChild) {
+        for(StockChild s: stockList){
+            if(s.getStockName().equals(stockChild.getStockName())) {
+                s.incCount(quality);
+                return;
+            }
+        }
         stockChild.incCount(quality);
         stockList.add(stockChild);
     }

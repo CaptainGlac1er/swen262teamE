@@ -201,6 +201,73 @@ public class Portfolio {
         }
         return true;
     }
+    public void importPortfolio(){
+        JFileChooser f = new JFileChooser();
+        f.setDialogTitle("Import Account");
+        int userSelection = f.showOpenDialog(new JFrame());
+        if(userSelection == JFileChooser.APPROVE_OPTION){
+            File checkfile = new File(f.getSelectedFile().getAbsolutePath());
+            if (!checkfile.exists()) {
+                try {
+                    PrintWriter writer = new PrintWriter(checkfile, "UTF-8");
+                    writer.println("1");
+                    writer.println("1");
+                    writer.println("a");
+                    writer.println("Main");
+                    writer.println("0");
+                    writer.close();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                String currentLine;
+                //BufferedReader br = new BufferedReader(new FileReader(checkfile));
+                Scanner scanner = new Scanner(checkfile);
+                SearchStock searchStock = new SearchStock();
+                int topLevelEntries = Integer.parseInt(scanner.nextLine());
+                for (int a = 0; a < topLevelEntries; a++) {
+                    int amount = Integer.parseInt(scanner.nextLine());
+                    System.out.println(amount);
+                    for (int b = 0; b < amount; b++) {
+
+                        String input = scanner.nextLine();
+                        System.out.println("reading " + input);
+                        char type = input.charAt(0);
+                        switch (type) {
+                            case 'a':
+                                String accountName = scanner.nextLine();
+                                double balance = Double.parseDouble(scanner.nextLine());
+                                assets.loadCashAccount(balance, accountName);
+                                break;
+                            case 's':
+                                String ticker = scanner.nextLine();
+                                int count = Integer.parseInt(scanner.nextLine());
+                                System.out.println(searchStock);
+                                assets.loadStock(count, searchStock.getStock(ticker));
+                                break;
+                            case 't':
+                                String tranType = scanner.nextLine();
+                                String info = scanner.nextLine();
+                                String date = scanner.nextLine();
+                                assets.addTransaction(tranType, info, date);
+                                break;
+                            case 'w':
+                                String WatchTicker = scanner.nextLine();
+                                watchList.addStockToWatchList(searchStock.getStock(WatchTicker), 0,0);
+                                break;
+                        }
+                    }
+
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * @param ifCustomSave
