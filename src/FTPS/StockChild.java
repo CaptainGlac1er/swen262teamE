@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Josh on 3/3/2016.
  */
 //concrete class for stock composition, also component
-public class StockChild implements Stock {
+public class StockChild implements Stock, IterContainer {
     //needed data for a composite stock
     private int stockCount;
     private String stockName;
@@ -18,7 +18,14 @@ public class StockChild implements Stock {
     private double stockWorth;
     private double projWorth;
     private List<StockChild> indexStocks;
+    private StockChild indexStocksArray[];
     private ArrayList<Component> observers = new ArrayList<>();
+
+    @Override
+    public IndexIterator getIterator()
+    {
+        return new IndexIterator();
+    }
 
     public StockChild(String inName, String inAbbr, String inIndex, double inWorth, int inCount) {
         stockCount = inCount;
@@ -46,8 +53,28 @@ public class StockChild implements Stock {
     }
 
     //Return total worth of owned stock
-    public double getTotWorth() {
-        return (stockWorth * stockCount);
+    public double getTotWorth()
+    {
+        int count = 0;
+
+        if (indexStocks.size() == 0)
+        {
+            return (stockWorth * stockCount);
+        }
+
+        else
+        {
+            for (Iterator iter = this.getIterator(); iter.hasNext(); )
+            {
+                StockChild currStock = (StockChild) iter.next();
+                stockWorth += currStock.getWorth();
+                count++;
+            }
+
+            stockWorth = stockWorth / count;
+        }
+
+        return stockWorth * stockCount;
     }
 
     //return worth of one stock
@@ -106,5 +133,44 @@ public class StockChild implements Stock {
         for (Component c : observers) {
             ((JLabel) c).setText(getWorth() + "x" + getCount() + "=" + getTotWorth());
         }
+    }
+
+    private void buildArray()
+    {
+        int index = 0;
+
+        for (StockChild stock : indexStocks)
+        {
+            indexStocksArray[index] = stock;
+        }
+    }
+    private class IndexIterator implements Iterator
+    {
+        int index;
+
+        @Override
+        public boolean hasNext()
+        {
+            if(index < indexStocks.size())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Object next()
+        {
+            buildArray();
+
+            if (this.hasNext())
+            {
+                return indexStocksArray[index++];
+            }
+
+            return null;
+        }
+
+
     }
 }
