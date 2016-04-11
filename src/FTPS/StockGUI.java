@@ -5,6 +5,7 @@ import javax.swing.text.html.ObjectView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 /**
  * Created by CaptainGlac1er on 4/3/2016.
@@ -22,7 +23,9 @@ public class StockGUI extends JFrame implements Updatable {
         JLabel ticker = new JLabel(info.getStockAbbr());
         ticker.setFont(new Font("Arial", Font.PLAIN, 20));
         panel.add(ticker, BorderLayout.NORTH);
-        price.setText(info.getWorth() +"");
+
+        DecimalFormat cash = new DecimalFormat("$###,###.###");
+        price.setText(cash.format(info.getWorth()));
         panel.add(price);
 
         owned.setText(info.getCount() + "");

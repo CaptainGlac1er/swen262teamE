@@ -12,6 +12,12 @@ import java.util.ArrayList;
 public class LoginGUI extends PageGUI {
     LoginBack backend;
     LoginUpdater updater;
+
+    /**
+     * Creates LoginGUI
+     * @param backend backend to send data
+     * @param updater updater so the portfolio can update the gui
+     */
     public LoginGUI(LoginBack backend, LoginUpdater updater){
         this.updater = updater;
         this.backend = backend;

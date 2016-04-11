@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -30,9 +31,9 @@ public class AccountGUI extends PageGUI {
         data.setLayout(new BoxLayout(data,BoxLayout.Y_AXIS));
         ScrollPane pane = new ScrollPane();
         pane.add(data);
-
+        DecimalFormat cash = new DecimalFormat("$###,###.###");
         for(CashAccount c : accountBackend.getAccounts())
-            data.add(addAccountPanel(c.getAccountName(), c.getAccountWorth() + "", c));
+            data.add(addAccountPanel(c.getAccountName(), cash.format(c.getAccountWorth()), c));
         panel.add(pane, BorderLayout.CENTER);
         JPanel bottomBar = new JPanel();
         JTextField newAccount = new JTextField();

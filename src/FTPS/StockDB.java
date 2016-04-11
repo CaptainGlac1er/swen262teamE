@@ -1,7 +1,9 @@
 package FTPS;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -38,7 +40,12 @@ public class StockDB implements Runnable
         StockChild tempStock;
 
         //create string for file path to equities file
-        String filepath = /*(new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParent() +*/ "C:\\equities.csv";
+        String filepath = null;
+        try {
+            filepath = (new File(FTPS.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath())).getParent() + "\\equities.csv";
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         try
         {
             String currentLine;

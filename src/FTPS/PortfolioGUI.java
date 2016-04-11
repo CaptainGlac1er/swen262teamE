@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 /**
  * Created by George Walter Colrove IV on 3/23/2016.
@@ -18,6 +19,17 @@ public class PortfolioGUI extends PageGUI implements Updatable{
     AssetsGUI assetsGUI;
     TransactionsGUI transactionsGUI;
     JLabel accountWorth;
+
+    /**
+     *
+     *
+     * @param backend backend to handle the logic
+     * @param updater updater to update this panel
+     * @param accountGUI accountgui panel
+     * @param assetsGUI assestgui panel
+     * @param watchListGUI watchlistgui panel
+     * @param transactionsGUI transactionsgui panel
+     */
     public PortfolioGUI(PortfolioBackend backend, PortfolioUpdater updater, AccountGUI accountGUI, AssetsGUI assetsGUI, WatchListGUI watchListGUI, TransactionsGUI transactionsGUI){
         portfolioBackend = backend;
         portfolioUpdater = updater;
@@ -38,6 +50,7 @@ public class PortfolioGUI extends PageGUI implements Updatable{
         JPanel rightPanel = new JPanel();
         JPanel headerPanel = new JPanel();
 
+        //setting panel frame
         JButton settings = new JButton("Settings");
         settings.addActionListener(new ActionListener() {
             @Override
@@ -129,7 +142,8 @@ public class PortfolioGUI extends PageGUI implements Updatable{
             }
         });
         bottomPanel.add(saveButton);
-        accountWorth = new JLabel("   Total Value: $" + portfolioBackend.getPortfolio().totalValue());
+        DecimalFormat cash = new DecimalFormat("$###,###.###");
+        accountWorth = new JLabel("   Total Value: " + cash.format(portfolioBackend.getPortfolio().totalValue()));
         bottomPanel.add(accountWorth, BorderLayout.EAST);
 
         panel.add(headerPanel, BorderLayout.NORTH);

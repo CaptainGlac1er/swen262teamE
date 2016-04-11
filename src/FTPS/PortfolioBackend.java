@@ -16,6 +16,12 @@ public class PortfolioBackend extends PageBackend implements Updatable {
     TransactionsBackend transactionsBackend;
     PortfolioGUI portfolioGUI;
     Portfolio portfolio;
+
+    /**
+     *
+     * @param pageUpdater
+     * @param user
+     */
     public PortfolioBackend(PageUpdater pageUpdater, User user){
         portfolio = new Portfolio(user, this);
         askRefresh();
